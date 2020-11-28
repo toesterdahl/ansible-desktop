@@ -1,0 +1,16 @@
+---
+# Example execution: ansible-playbook main.yml --ask-become-pass -i inventory.yml
+- hosts: laptop
+  connection: local
+  roles:
+    - { role: aptupgrade }
+    - { role: gnuessentials }
+    - { role: gnome3 }
+    - { role: devtools }
+    - { role: productivity }
+    - { role: docker, tags: ['docker'] }
+    - { role: iancleary.jetbrains_mono }
+    - { role: google-chrome }
+    - { role: fonts }
+    - { role: cmdline }
+

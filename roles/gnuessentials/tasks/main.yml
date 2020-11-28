@@ -1,0 +1,23 @@
+---
+- name: Update apt-get repo and cache
+  become: yes
+  apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+  
+- name: Install default packages
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop: 
+    - tree
+    - vim
+    
+- name: Set vi tab order
+  blockinfile:
+    path: ~/.vimrc
+    marker: "\" {mark} Tab size 4 using spaces (managed by ansible)"
+    block: |
+      :set tabstop=4
+      :set shiftwidth=4
+      :set expandtab
+

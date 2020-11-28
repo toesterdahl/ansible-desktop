@@ -1,0 +1,19 @@
+---
+- name: Add sourcing bin/bashrc_private.sh
+  blockinfile:
+    path: ~/.bashrc
+    marker: "# {mark} Source ~/bin/bashrc_private.sh, should it exist (managed by ansible)"
+    block: |
+      if [ -f ~/bin/bashrc_private.sh ]; then
+        . ~/bin/bashrc_private.sh
+      fi
+
+- name: Set vi tab order
+  blockinfile:
+    path: ~/.vimrc
+    marker: "\" {mark} Tab size 4 using spaces (managed by ansible)"
+    block: |
+      :set tabstop=4
+      :set shiftwidth=4
+      :set expandtab
+

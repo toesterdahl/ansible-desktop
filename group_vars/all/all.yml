@@ -1,0 +1,8 @@
+---
+ansible_connection: local
+ubuntu_target_version_name: focal
+ubuntu_target_version: 20.04
+jetbrains_mono_version: 1.0.3
+git_email: donald.duck@ducktown.com
+git_user: Donald Duck
+

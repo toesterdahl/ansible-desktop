@@ -1,0 +1,18 @@
+---
+# Verification: ansible-inventory -i inventory.yml --list
+laptop:
+  hosts:
+    localhost:
+    jamaica:
+    martinique:
+
+server:
+  hosts:
+    madagascar:
+    
+home:
+  children:
+    laptop:
+    server:
+
+
