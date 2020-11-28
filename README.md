@@ -30,6 +30,9 @@ The assumption here is that you check out the project and apply to a local machi
 
 ```ansible-playbook main.yml --ask-become-pass --limit `hostname` --inventory inventory.yml```
 
+# Credits: 
+* Author: Torbjörn Österdahl (ultra-marine.org)
+
 # Participation (Contributions)
 
 This is an example provided 'as is'. Don't expect me to react on any issues raised. 
