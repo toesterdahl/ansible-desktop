@@ -3,7 +3,7 @@ Setting up the local desktop (Ubuntu) using Ansible.
 
 This project is for managing an Ubuntu desktop machine using Ansible. The Ansible playbook is applied locally; as you would usually be logged in to a desktop. 
 
-# Install ansible
+# Install Ansible
 
 sudo apt install ansible 
 
@@ -30,6 +30,10 @@ The assumption here is that you check out the project and apply to a local machi
 
 ```ansible-playbook main.yml --ask-become-pass --limit `hostname` --inventory inventory.yml```
 
+# Participation (Contributions)
+
+This is an example provided 'as is'. Don't expect me to react on any issues raised. 
+
 # Inspiration
 
 - https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html
@@ -38,3 +42,4 @@ The assumption here is that you check out the project and apply to a local machi
 - https://opensource.com/article/18/3/manage-workstation-ansible
 - https://github.com/cdown/ansible-desktop
 - https://gist.github.com/alces/caa3e7e5f46f9595f715f0f55eef65c1
+
