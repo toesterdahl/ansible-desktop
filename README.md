@@ -32,9 +32,9 @@ The assumption here is that you check out the project and apply to a local machi
 
 # Inspiration
 
-https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html
-https://dev.to/iancleary/automating-your-desktop-with-ansible-20jk
-https://github.com/iancleary/ansible-desktop/
-https://opensource.com/article/18/3/manage-workstation-ansible
-https://github.com/cdown/ansible-desktop
-https://gist.github.com/alces/caa3e7e5f46f9595f715f0f55eef65c1
+- https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html
+- https://dev.to/iancleary/automating-your-desktop-with-ansible-20jk
+- https://github.com/iancleary/ansible-desktop/
+- https://opensource.com/article/18/3/manage-workstation-ansible
+- https://github.com/cdown/ansible-desktop
+- https://gist.github.com/alces/caa3e7e5f46f9595f715f0f55eef65c1
