@@ -45,4 +45,5 @@ This is an example provided 'as is'. Don't expect me to react on any issues rais
 - https://opensource.com/article/18/3/manage-workstation-ansible
 - https://github.com/cdown/ansible-desktop
 - https://gist.github.com/alces/caa3e7e5f46f9595f715f0f55eef65c1
+- https://github.com/MichaelAquilina/ubuntu-ansible
 
