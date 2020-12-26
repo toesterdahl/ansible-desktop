@@ -1,5 +1,5 @@
 ---
-# Example execution: ansible-playbook main.yml --ask-become-pass -i inventory.yml
+# Example execution: ansible-playbook main.yml --ask-become-pass  --limit `hostname` -i inventory.yml
 - hosts: laptop
   connection: local
   roles:
@@ -13,4 +13,5 @@
     - { role: google-chrome }
     - { role: fonts }
     - { role: cmdline }
+    - { role: nfs-client }
 
