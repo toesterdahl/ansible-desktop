@@ -17,11 +17,15 @@
 - name: Git config global
   blockinfile:
     path: ~/.gitconfig
+    create: yes
     marker: "# {mark} Git config (managed by ansible)"
     block: |
       [user]
-      email = {{ git_email }}
+        email = {{ git_email }}
         name = {{ git_user }}
       [core]
         editor = vim
+        excludesFile = ~/bin/git/gitignore
+      [merge]
+        tool = meld
 
