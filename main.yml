@@ -4,7 +4,6 @@
   connection: local
   roles:
     - { role: aptupgrade }
-    - { role: gnuessentials }
     - { role: gnome3 }
     - { role: devtools }
     - { role: productivity }
