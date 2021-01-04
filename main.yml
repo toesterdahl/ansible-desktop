@@ -13,4 +13,5 @@
     - { role: fonts }
     - { role: cmdline }
     - { role: nfs-client }
+    - { role: mega.nz }
 
