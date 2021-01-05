@@ -11,3 +11,10 @@
   loop:
     - dconf-editor
     - gnome-tweaks 
+    - python3-psutil
+    
+- name: Dock icon size
+  dconf:
+    key: "/org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size"
+    value: "28"
+    state: present
