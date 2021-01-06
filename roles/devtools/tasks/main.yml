@@ -13,6 +13,9 @@
     - meld
     - openjdk-8-jdk
     - openjdk-11-jdk
+    - gcc
+    - build-essential
+    - linux-headers-generic
 
 - name: Git config global
   blockinfile:
