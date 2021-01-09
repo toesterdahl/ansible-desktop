@@ -15,4 +15,5 @@
     - { role: nfs-client }
     - { role: mega.nz }
     - { role: terminal-profiles }
+    - { role: firefox }
 

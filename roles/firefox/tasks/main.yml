@@ -1,0 +1,27 @@
+---
+# Copy firefox.desktop, 
+# if destination does not already exist (force=no)
+#
+- name: Copy firefox launcher
+  copy: 
+    src: /usr/share/applications/firefox.desktop
+    dest: ~/.local/share/applications/firefox.desktop
+    force: no
+
+# TODO: Not idempotent, adds the line more than once on repeated invocations.
+- name: Start default profile as default
+  lineinfile:
+    path: "~/.local/share/applications/firefox.desktop"
+    backrefs: yes
+    regexp: "^(Exec=firefox.*)$"
+    line: '\1 -P default'
+    firstmatch: yes
+    state: present
+
+# Create profiles (see profile.yml)
+- include_tasks: roles/firefox/tasks/profile.yml
+  loop:
+    - EC
+    - ECZenHub
+    - Safe
+

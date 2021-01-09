@@ -1,0 +1,30 @@
+---
+- name: Is there an {{ item }} profile
+  command: grep -Fxq 'Name={{ item }}' ~/.mozilla/firefox/profiles.ini
+  register: profile_exists
+  ignore_errors: true
+
+- name: Create {{ item }} profile
+  command: firefox -CreateProfile {{ item }}
+  when: profile_exists.rc == 1
+
+- name: Append profile {{ item }}
+  lineinfile:
+    path: "~/.local/share/applications/firefox.desktop"
+    backrefs: yes
+    regexp: "^(Actions=.*)$"
+    line: '\1;{{ item }}'
+  when: profile_exists.rc == 1
+
+- name: Git config global
+  blockinfile:
+    path: ~/.local/share/applications/firefox.desktop
+    create: yes
+    marker: "# {mark} Action start Profile {{ item }} (managed by ansible)"
+    block: |
+      [Desktop Action {{ item }}]
+        Name=Run Firefox with {{ item }}
+        Exec=firefox -P {{ item }} -no-remote
+        OnlyShowIn=Unity;
+  when: profile_exists.rc == 1
+
