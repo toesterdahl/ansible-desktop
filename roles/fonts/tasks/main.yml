@@ -10,3 +10,10 @@
     state: present
   loop:
     - fonts-firacode 
+    
+- name: Set monospaced font to firacode
+  dconf:
+    key: "/org/gnome/desktop/interface/monospace-font-name"
+    value: "'Fira Code 10'"
+    state: present
+    

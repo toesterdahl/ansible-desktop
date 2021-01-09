@@ -18,3 +18,45 @@
     key: "/org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size"
     value: "28"
     state: present
+    
+- name: Terminal bind ctrl-v to paste
+  dconf:
+    key: "/org/gnome/Terminal/Legacy/Keybindings/paste"
+    value: "'<Primary>v'"
+    state: present
+
+- name: Terminal bind ctrl-c to copy
+  dconf:
+    key: "/org/gnome/Terminal/Legacy/Keybindings/copy"
+    value: "'<Primary>c'"
+    state: present
+
+- name: Text editor active plugins
+  dconf:
+    key: "/org/gnome/gedit/plugins/active-plugins"
+    value: "['time', 'filebrowser', 'drawspaces', 'docinfo', 'spell', 'modelines', 'quickhighlight', 'smartspaces']"
+    state: present
+
+- name: Text editor settings
+  dconf: 
+    key: "{{ '/org/gnome/gedit/preferences/editor/' + item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop: 
+     - { key: "insert-spaces", value: "true" }
+     - { key: "scheme", value: "'tango'" }
+     - { key: "tabs-size=uint32", value: "4" }
+     - { key: "wrap-last-split-mode", value: "'word'" }
+
+- name: Dock calendar add week number
+  dconf:
+    key: "/org/gnome/desktop/calendar/show-weekdate"
+    value: "true"
+    state: present
+
+- name: Dock calendar add weekday
+  dconf:
+    key: "/org/gnome/desktop/interface/clock-show-weekday"
+    value: "true"
+    state: present
+

@@ -1,0 +1,118 @@
+---
+
+ # Needed for dconf, see https://github.com/ansible/ansible/issues/57920   
+ - set_fact:
+     dconf_quoted_format: >-
+          '%s'
+          
+ - name: Create profile 'Lila'
+   dconf: 
+     key: "{{ '/org/gnome/terminal/legacy/profiles:/:5fde5daa-a3b1-4e1d-afe4-ac922cc0c680/' + item.key }}"
+     value: "{{ item.value }}"
+     state: present
+   loop: 
+     - { key: "audible-bell", value: "true" }
+     - { key: "background-color", value: "'rgb(173,127,168)'" }
+     - { key: "bold-is-bright", value: "false" }
+     - { key: "default-size-columns", value: "102" }
+     - { key: "default-size-rows", value: "55" }
+     - { key: "foreground-color", value: "'rgb(46,52,54)'" }
+     - { key: "use-theme-colors", value: "false" }
+     - { key: "visible-name", value: "'Lila'" }
+
+ - name: Create profile 'SolarizedDark'
+   dconf: 
+     key: "{{ '/org/gnome/terminal/legacy/profiles:/:65d728da-4b1b-4d4c-af74-6be88ce70f53/' + item.key }}"
+     value: "{{ item.value }}"
+     state: present
+   loop: 
+     - { key: "audible-bell", value: "true" }
+     - { key: "background-color", value: "'rgb(0,43,54)'" }
+     - { key: "bold-is-bright", value: "false" }
+     - { key: "default-size-columns", value: "102" }
+     - { key: "default-size-rows", value: "55" }
+     - { key: "foreground-color", value: "'rgb(131,148,150)'" }
+     - { key: "use-theme-colors", value: "false" }
+     - { key: "visible-name", value: "'SolarizedDark'" }
+
+ - name: Create profile 'Yellow'
+   dconf: 
+     key: "{{ '/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' + item.key }}"
+     value: "{{ item.value }}"
+     state: present
+   loop: 
+     - { key: "audible-bell", value: "true" }
+     - { key: "background-color", value: "'rgb(252,233,79)'" }
+     - { key: "bold-is-bright", value: "false" }
+     - { key: "default-size-columns", value: "102" }
+     - { key: "default-size-rows", value: "55" }
+     - { key: "foreground-color", value: "'rgb(46,52,54)'" }
+     - { key: "use-theme-colors", value: "false" }
+     - { key: "visible-name", value: "'Yellow'" }
+
+ - name: Create profile 'TangoLight'
+   dconf: 
+     key: "{{ '/org/gnome/terminal/legacy/profiles:/:b5468251-c59c-4903-9ec2-8824394827fa/' + item.key }}"
+     value: "{{ item.value }}"
+     state: present
+   loop: 
+     - { key: "audible-bell", value: "true" }
+     - { key: "background-color", value: "'rgb(174,174,172)'" }
+     - { key: "bold-is-bright", value: "false" }
+     - { key: "default-size-columns", value: "102" }
+     - { key: "default-size-rows", value: "55" }
+     - { key: "foreground-color", value: "'rgb(46,52,54)'" }
+     - { key: "use-theme-colors", value: "false" }
+     - { key: "visible-name", value: "'TangoLight'" }
+
+ - name: Create profile 'Blue'
+   dconf: 
+     key: "{{ '/org/gnome/terminal/legacy/profiles:/:bc723c43-933b-434d-9d22-bb30ae206d76/' + item.key }}"
+     value: "{{ item.value }}"
+     state: present
+   loop: 
+     - { key: "audible-bell", value: "true" }
+     - { key: "background-color", value: "'rgb(115,160,207)'" }
+     - { key: "bold-is-bright", value: "false" }
+     - { key: "default-size-columns", value: "102" }
+     - { key: "default-size-rows", value: "55" }
+     - { key: "foreground-color", value: "'rgb(46,52,54)'" }
+     - { key: "use-theme-colors", value: "false" }
+     - { key: "visible-name", value: "'Blue'" }
+
+ - name: Create profile 'SolarizedLight'
+   dconf: 
+     key: "{{ '/org/gnome/terminal/legacy/profiles:/:cabc48c6-b025-4051-a88b-80b167b2394e/' + item.key }}"
+     value: "{{ item.value }}"
+     state: present
+   loop: 
+     - { key: "audible-bell", value: "true" }
+     - { key: "background-color", value: "'rgb(180,175,162)'" }
+     - { key: "bold-is-bright", value: "false" }
+     - { key: "default-size-columns", value: "102" }
+     - { key: "default-size-rows", value: "55" }
+     - { key: "foreground-color", value: "'rgb(46,52,54)'" }
+     - { key: "use-theme-colors", value: "false" }
+     - { key: "visible-name", value: "'SolarizedLight'" }
+
+ - name: Create profile 'TangoDark'
+   dconf: 
+     key: "{{ '/org/gnome/terminal/legacy/profiles:/:e71d4054-3124-4292-8e99-56faccc4e43d/' + item.key }}"
+     value: "{{ item.value }}"
+     state: present
+   loop: 
+     - { key: "audible-bell", value: "true" }
+     - { key: "background-color", value: "'rgb(46,52,54)'" }
+     - { key: "bold-is-bright", value: "false" }
+     - { key: "default-size-columns", value: "102" }
+     - { key: "default-size-rows", value: "55" }
+     - { key: "foreground-color", value: "'rgb(211,215,207)'" }
+     - { key: "use-theme-colors", value: "false" }
+     - { key: "visible-name", value: "'TangoDark'" }
+
+ - name: List profiles
+   dconf: 
+     key: "/org/gnome/terminal/legacy/profiles:/list"
+     value: "['b1dcc9dd-5262-4d8d-a863-c897e6d979b9', 'bc723c43-933b-434d-9d22-bb30ae206d76', '5fde5daa-a3b1-4e1d-afe4-ac922cc0c680', 'cabc48c6-b025-4051-a88b-80b167b2394e', '65d728da-4b1b-4d4c-af74-6be88ce70f53', 'b5468251-c59c-4903-9ec2-8824394827fa', 'e71d4054-3124-4292-8e99-56faccc4e43d']"
+     state: present
+
