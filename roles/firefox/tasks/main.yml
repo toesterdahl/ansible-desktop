@@ -8,14 +8,13 @@
     dest: ~/.local/share/applications/firefox.desktop
     force: no
 
-# TODO: Not idempotent, adds the line more than once on repeated invocations.
 - name: Start default profile as default
   lineinfile:
     path: "~/.local/share/applications/firefox.desktop"
-    backrefs: yes
-    regexp: "^(Exec=firefox.*)$"
-    line: '\1 -P default'
+    backrefs: no
     firstmatch: yes
+    regexp: '^Exec=firefox %u.*'
+    line: 'Exec=firefox %u -P default'    
     state: present
 
 # Create profiles (see profile.yml)
