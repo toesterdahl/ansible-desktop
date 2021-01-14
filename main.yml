@@ -16,4 +16,5 @@
     - { role: mega.nz }
     - { role: terminal-profiles }
     - { role: firefox }
+    - { role: ec }
 
