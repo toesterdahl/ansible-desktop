@@ -11,6 +11,7 @@
   loop: 
     - tree
     - vim
+    - p7zip
     
 - name: Add sourcing bin/bashrc_private.sh
   blockinfile:
