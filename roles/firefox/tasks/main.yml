@@ -8,13 +8,15 @@
     dest: ~/.local/share/applications/firefox.desktop
     force: no
 
+# Since Firefox version 67 the default profile is 'default-release'
+#
 - name: Start default profile as default
   lineinfile:
     path: "~/.local/share/applications/firefox.desktop"
     backrefs: no
     firstmatch: yes
     regexp: '^Exec=firefox %u.*'
-    line: 'Exec=firefox %u -P default'    
+    line: 'Exec=firefox %u -P default-release'    
     state: present
 
 # Create profiles (see profile.yml)
