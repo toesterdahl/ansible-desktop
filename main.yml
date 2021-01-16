@@ -1,20 +1,25 @@
 ---
 # Example execution: ansible-playbook main.yml --ask-become-pass  --limit `hostname` -i inventory.yml
-- hosts: laptop
+- hosts: home
   connection: local
   roles:
     - { role: aptupgrade }
-    - { role: gnome3 }
+    - { role: cmdline }
     - { role: devtools }
-    - { role: productivity }
     - { role: docker, tags: ['docker'] }
-    - { role: iancleary.jetbrains_mono }
+    - { role: mega.nz }
+- hosts: laptop
+  connection: local
+  roles:
+    - { role: productivity }
+    - { role: gnome3 }
     - { role: google-chrome }
     - { role: fonts }
-    - { role: cmdline }
     - { role: nfs-client }
-    - { role: mega.nz }
     - { role: terminal-profiles }
     - { role: firefox }
     - { role: ec }
-
+- hosts: base
+  connection: local
+  roles:
+    - { role: http-proxy }

@@ -1,0 +1,62 @@
+---
+- name: Update apt-get repo and cache
+  become: yes
+  apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+- name: Install nginx
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - nginx 
+
+- name: Add nginx proxy-autoconfig mime type
+  become: yes
+  lineinfile:
+    path: "/etc/nginx/mime.types"
+    line: "    application/x-ns-proxy-autoconfig pac;"
+    insertbefore: '^}'
+    create: yes
+
+- name: Create nginx wwwroot directory
+  become: yes
+  file: 
+    path: /var/www/base/wwwroot 
+    state: directory
+    recurse: yes
+
+- name: Add nginx proxy.pac location
+  become: yes
+  copy:
+    dest: "/etc/nginx/conf.d/pacserver.conf"
+    content: |
+      server {
+        listen 3130;
+        server_name base.local;
+        charset utf8;
+        location / {
+          root /var/www/base/wwwroot;
+          index proxy.pac;
+        }
+      }
+  register: pacserver
+      
+- name: Add nginx proxy.pac file
+  become: yes
+  copy:
+    dest: "/var/www/base/wwwroot/proxy.pac"
+    content: |
+      function FindProxyForURL(url, host) {
+        if (dnsDomainIs(host, "base") ||
+            shExpMatch(host, "(*.base|base.local)"))
+            return "DIRECT";
+            
+        return "PROXY base.local:3128 ; DIRECT";
+      }
+      
+- name: Restart service nginx, in all cases
+  ansible.builtin.service:
+    name: nginx
+    state: restart
+  when: pacserver.changed
