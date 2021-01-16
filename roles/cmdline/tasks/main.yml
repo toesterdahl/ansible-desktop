@@ -25,6 +25,7 @@
 - name: Set vi tab order
   blockinfile:
     path: ~/.vimrc
+    create: yes
     marker: "\" {mark} Tab size 4 using spaces (managed by ansible)"
     block: |
       :set tabstop=4
