@@ -60,3 +60,14 @@
     value: "true"
     state: present
 
+- name: Nautilus settings
+  dconf: 
+    key: "{{ '/org/gnome/nautilus/preferences/' + item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop: 
+     - { key: "click-policy", value: "'single'" }
+     - { key: "default-folder-viewer", value: "'list-view'" }
+     - { key: "show-delete-permanently", value: "true" }
+
+
