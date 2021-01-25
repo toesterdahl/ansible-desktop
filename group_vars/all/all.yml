@@ -5,4 +5,4 @@ ubuntu_target_version: 20.04
 jetbrains_mono_version: 1.0.3
 git_email: donald.duck@ducktown.com
 git_user: Donald Duck
-
+system_autoproxy_url: http://localhost:3130/proxy.pac

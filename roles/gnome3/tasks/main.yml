@@ -76,6 +76,7 @@
     value: "{{ item.value }}"
     state: present
   loop: 
-     - { key: "autoconfig-url", value: "'http://base.local:3130/proxy.pac'" }
+     - { key: "autoconfig-url", value: "'{{ system_autoproxy_url }}'" }
+     - { key: "mode", value: "'auto'" }
 
 
