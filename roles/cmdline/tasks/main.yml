@@ -12,6 +12,7 @@
     - tree
     - vim
     - p7zip
+    - net-tools
     
 - name: Add sourcing bin/bashrc_private.sh
   blockinfile:
