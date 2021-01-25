@@ -18,6 +18,7 @@
     - { role: nfs-client }
     - { role: terminal-profiles }
     - { role: firefox }
+    - { role: skype }
     - { role: ec }
 - hosts: base
   connection: local
