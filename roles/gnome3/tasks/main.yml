@@ -70,4 +70,12 @@
      - { key: "default-folder-viewer", value: "'list-view'" }
      - { key: "show-delete-permanently", value: "true" }
 
+- name: System proxy
+  dconf: 
+    key: "{{ '/system/proxy/' + item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop: 
+     - { key: "autoconfig-url", value: "'http://base.local:3130/proxy.pac'" }
+
 
