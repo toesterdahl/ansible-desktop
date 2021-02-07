@@ -11,3 +11,12 @@
   loop:
     - nfs-common 
 
+- name: Share mount
+  become: yes
+  blockinfile:
+    path: /etc/fstab
+    create: yes
+    marker: "\" {mark} Mounting share"
+    block: |
+      {{ item }}
+  with_items: "{{ share_mount }}"
