@@ -20,6 +20,7 @@
     - { role: firefox }
     - { role: skype }
     - { role: signal }
+    - { role: spotify }
     - { role: zoom }
     - { role: ec }
 - hosts: base

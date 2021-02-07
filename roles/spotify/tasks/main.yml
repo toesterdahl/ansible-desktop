@@ -1,0 +1,27 @@
+---
+# Details from https://www.spotify.com/us/download/linux/
+#
+- name: Spotify - Add Spotify's official GPG Key
+  become: true
+  apt_key:
+    url: "https://download.spotify.com/debian/pubkey_0D811D58.gpg"
+    state: present
+
+- name: Spotify - Setup Spotify stable repository
+  become: true
+  apt_repository:
+    filename: "{{ spotify_apt_file }}"
+    repo: >-
+      deb http://repository.spotify.com stable non-free
+
+- name: Update apt cache
+  become: true
+  apt: update_cache=yes force_apt_get=yes
+
+- name: Spotify - Install
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - spotify-client
