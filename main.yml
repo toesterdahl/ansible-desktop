@@ -19,6 +19,7 @@
     - { role: terminal-profiles }
     - { role: firefox }
     - { role: skype }
+    - { role: signal }
     - { role: zoom }
     - { role: ec }
 - hosts: base

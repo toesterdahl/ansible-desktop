@@ -1,0 +1,31 @@
+---
+# Details from https://signal.org/de/download/#
+#
+# key id extracted using 'apt-key list'
+#
+- name: Signal - Add Signal's official GPG Key
+  become: true
+  apt_key:
+    id: DBA36B5181D0C816F630E889D980A17457F6FB06
+    url: "https://updates.signal.org/desktop/apt/keys.asc"
+    state: present
+
+- name: Signal - Setup Signal stable repository
+  become: true
+  # It appears that the repo only contain an entry for the 'xenial' Ubuntu version
+  apt_repository:
+    filename: "{{ signal_apt_file }}"
+    repo: >-
+      deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main
+
+- name: Update apt cache
+  become: true
+  apt: update_cache=yes force_apt_get=yes
+
+- name: Signal - Install
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - signal-desktop
