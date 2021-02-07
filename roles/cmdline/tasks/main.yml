@@ -11,8 +11,9 @@
   loop: 
     - tree
     - vim
-    - p7zip
+    - p7zip-full
     - net-tools
+    - xmlstarlet
     
 - name: Add sourcing bin/bashrc_private.sh
   blockinfile:
