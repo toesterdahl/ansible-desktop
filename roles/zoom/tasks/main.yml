@@ -1,0 +1,34 @@
+---
+# Details from https://www.zoom.com/us/download/linux/
+#
+- name: Check if zoom is installed
+  command: dpkg-query -W zoom
+  register: zoom_check_deb
+  failed_when: zoom_check_deb.rc > 1
+  changed_when: zoom_check_deb.rc == 1
+
+- name: Zoom - Add Zoom's official GPG Key
+  become: true
+  apt_key:
+    id: 396060CADD8A75220BFCB369B903BF1861A7C71D
+    url: "https://zoom.us/linux/download/pubkey"
+    state: present
+  when: zoom_check_deb.rc == 1
+
+- name: Zoom - Install dependencies
+  become: true
+  apt:
+    name: "libgl1-mesa-glx libegl1-mesa libxcb-xtest0"
+    state: latest
+  when: zoom_check_deb.rc == 1
+
+- name: Download zoom
+  get_url: 
+    url="{{ zoom_url }}"
+    dest="/home/{{ ansible_env.USER }}/Downloads/{{ zoom_name }}.deb"
+  when: zoom_check_deb.rc == 1
+
+- name: Install zoom
+  become: true
+  apt: deb="/home/{{ ansible_env.USER }}/Downloads/{{ zoom_name }}.deb"
+  when: zoom_check_deb.rc == 1
