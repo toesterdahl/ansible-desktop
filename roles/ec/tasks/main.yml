@@ -9,7 +9,7 @@
     marker: "# {mark} Source ~/bin/ec/bashrc_ec.sh, should it exist (managed by ansible)"
     block: |
       if [ -f ~/bin/ec/bashrc_ec.sh ]; then
-        ~/bin/ec/bashrc_ec.sh
+        . ~/bin/ec/bashrc_ec.sh
       fi  
   
 - name: Install default packages
