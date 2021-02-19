@@ -18,10 +18,14 @@
 - name: Zoom - Install dependencies
   become: true
   apt:
-    name: "libgl1-mesa-glx libegl1-mesa libxcb-xtest0"
+    name: "{{ item }}"
     state: latest
+  loop:
+    - libegl1-mesa
+    - libgl1-mesa-glx
+    - libxcb-xtest0
   when: zoom_check_deb.rc == 1
-
+    
 - name: Download zoom
   get_url: 
     url="{{ zoom_url }}"
