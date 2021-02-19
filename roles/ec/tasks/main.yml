@@ -3,6 +3,15 @@
   become: true
   apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
   
+- name: Add sourcing bin/ec/bashrc_ec.sh
+  blockinfile:
+    path: ~/.bashrc
+    marker: "# {mark} Source ~/bin/ec/bashrc_ec.sh, should it exist (managed by ansible)"
+    block: |
+      if [ -f ~/bin/ec/bashrc_ec.sh ]; then
+        ~/bin/ec/bashrc_ec.sh
+      fi  
+  
 - name: Install default packages
   become: true
   apt:

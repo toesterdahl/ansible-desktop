@@ -24,15 +24,6 @@
         . ~/bin/bashrc_private.sh
       fi
 
-- name: Add sourcing bin/ec/bashcrc_ec.sh
-  blockinfile:
-    path: ~/.bashrc
-    marker: "# {mark} Source ~/bin/ec/bashcrc_ec.sh, should it exist (managed by ansible)"
-    block: |
-      if [ -f ~/bin/ec/bashcrc_ec.sh ]; then
-        ~/bin/ec/bashcrc_ec.sh
-      fi
-
 - name: Set vi tab order
   blockinfile:
     path: ~/.vimrc
