@@ -79,4 +79,11 @@
      - { key: "autoconfig-url", value: "'{{ system_autoproxy_url }}'" }
      - { key: "mode", value: "'auto'" }
 
+- name: Window manager settings
+  dconf: 
+    key: "{{ '/org/gnome/mutter/' + item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop: 
+     - { key: "attach-modal-dialogs", value: "false" }
 
