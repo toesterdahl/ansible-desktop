@@ -1,0 +1,36 @@
+---
+- name: Update apt-get repo and cache
+  become: yes
+  apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+- name: Install restic and anacron packages
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - restic 
+    - anacron 
+
+# 'restic init' will be required before 'restic backup', should the repository not exist
+
+- name: Anacron Tab
+  blockinfile:
+    path: ~/.config/anacron/etc/anacrontab
+    create: yes
+    marker: "# {mark} Anacron Tab (managed by ansible)"
+    block: |
+      # environment variable
+      RANDOM_DELAY=240
+      # period  delay   job-identifier  command
+      7 20  restic{{ inventory_hostname }}    restic -r sftp:torbjorn@base:/export/share/backup/backup{{ inventory_hostname }} --exclude-caches --exclude-file=$HOME/bin/restic/exclude.txt --verbose --password-file=$HOME/bin/restic/restic-pwd backup $HOME > /tmp/restic-backup{{ inventory_hostname }}.out
+      
+- name: Start Anacron
+  blockinfile:
+    path: ~/.bashrc
+    create: yes
+    marker: "# {mark} Start Anacron (managed by ansible)"
+    block: |
+      # Start anacron using the anacrontab file -t and the spooldir -S. The spooldir will contain the timestamps necessary not to repeat the jobs. 
+      anacron -s -t .config/anacron/etc/anacrontab -S ~/.local/anacron
+
