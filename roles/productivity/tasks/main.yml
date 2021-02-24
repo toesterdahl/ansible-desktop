@@ -20,3 +20,8 @@
     - webp
     - gthumb
     - filezilla
+    - tesseract-ocr
+    - tesseract-ocr-eng
+    - tesseract-ocr-deu
+    - tesseract-ocr-swe
+    - gocr
