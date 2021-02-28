@@ -16,7 +16,7 @@
   blockinfile:
     path: /etc/fstab
     create: yes
-    marker: "\" {mark} Mounting share"
+    marker: "# {mark} Mounting share"
     block: |
       {{ item }}
   with_items: "{{ share_mount }}"
