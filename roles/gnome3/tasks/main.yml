@@ -19,6 +19,12 @@
     value: "28"
     state: present
     
+- name: Gnome shell active plugins
+  dconf:
+    key: "/org/gnome/shell/enabled-extensions"
+    value: "['gnome-shell-audio-output-switcher@kgaut', 'bluetooth-quick-connect@bjarosze.gmail.com', 'caffeine@patapon.info']"
+    state: present    
+    
 - name: Terminal bind ctrl-v to paste
   dconf:
     key: "/org/gnome/Terminal/Legacy/Keybindings/paste"
@@ -86,4 +92,10 @@
     state: present
   loop: 
      - { key: "attach-modal-dialogs", value: "false" }
+
+- name: Numlock
+  dconf:
+    key: "/org/gnome/desktop/peripherals/keyboard/numlock-state"
+    value: "true"
+    state: present
 
