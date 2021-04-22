@@ -16,6 +16,7 @@
     - gcc
     - build-essential
     - linux-headers-generic
+    - visualvm
 
 - name: Git config global
   blockinfile:
