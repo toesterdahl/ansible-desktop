@@ -24,6 +24,7 @@
     - { role: spotify }
     - { role: zoom }
     - { role: ec }
+    - { role: r-lang }
 - hosts: base
   connection: local
   roles:
