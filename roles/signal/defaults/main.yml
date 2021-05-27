@@ -1,2 +1,2 @@
 ---
-signal_apt_file: /etc/apt/sources.list.d/signal.list
+signal_apt_file: /etc/apt/sources.list.d/signal

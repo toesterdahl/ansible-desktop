@@ -20,6 +20,7 @@
 - name: Docker - Setup Stable Repository 18.04
   become: true
   apt_repository:
+    filename: "{{ docker_apt_file }}"
     repo: >-
       deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ubuntu_target_version_name }} stable
   when: ubuntu_target_version == "18.04"

@@ -1,2 +1,2 @@
 ---
-r-lang_apt_file: /etc/apt/sources.list.d/r-lang.list
+rlang_apt_file: /etc/apt/sources.list.d/rlang
