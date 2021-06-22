@@ -1,0 +1,39 @@
+---
+- name: Update apt-get repo and cache
+  become: yes
+  apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+- name: Install openssh-server
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - openssh-server 
+
+- name: Start openssh-server (verify status)
+  service:
+    name=ssh
+    state=started
+    enabled=yes
+
+- name: UFW allow ssh
+  become: yes
+  ufw:
+    rule: allow
+    name: OpenSSH
+    
+- name: UFW rate limit ssh
+  become: yes
+  ufw:
+    rule: limit
+    port: ssh
+    proto: tcp
+              
+- name: Make id_ed25519 authorized key
+  authorized_key:
+    user: "{{ lookup('env','USER') }}"
+    state: present
+    key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_ed25519.pub') }}"
+
+

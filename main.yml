@@ -9,6 +9,7 @@
     - { role: docker, tags: ['docker'] }
     - { role: mega.nz }
     - { role: restic }
+    - { role: openssh-server }
 - hosts: laptop
   connection: local
   roles:
