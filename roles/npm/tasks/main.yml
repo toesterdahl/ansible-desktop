@@ -1,0 +1,27 @@
+---
+- name: Install nvm
+  git: repo=https://github.com/creationix/nvm.git dest=~/.nvm # version=v0.38.00
+  tags: nvm
+  
+- name: Initiate nvm
+  blockinfile:
+    path: ~/.bashrc
+    create: yes
+    marker: "# {mark} Initiate NVM (managed by ansible)"
+    block: |
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+- name: Install node and npm
+  shell: "source ~/.nvm/nvm.sh && nvm install {{ node_version }} && nvm alias {{ node_version }}"                                 
+  args:
+    executable: /bin/bash
+
+# Upgrade npm to latest: nvm install-latest-npm
+# List remote versions (lts only): nvm ls-remote --lts
+# List local versions: nvm ls
+# Install latest lts version of node: nvm --lts
+# Install given version of node: nvm install <version>   
+# Use version (current session): nvm use <version>

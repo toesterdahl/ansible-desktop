@@ -10,6 +10,7 @@
     - { role: mega.nz }
     - { role: restic }
     - { role: openssh-server }
+    - { role: npm }
 - hosts: laptop
   connection: local
   roles:
