@@ -3,17 +3,16 @@
   become: yes
   apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
   
-- name: Install default packages
+- name: Install cmdline packages
   become: yes
   apt:
-    name: "{{ item }}"
-    state: present
-  loop: 
-    - tree
-    - vim
-    - p7zip-full
-    - net-tools
-    - xmlstarlet
+    pkg: 
+      - tree
+      - vim
+      - p7zip-full
+      - net-tools
+      - xmlstarlet
+    state: latest
     
 - name: Add sourcing bin/bashrc_private.sh
   blockinfile:

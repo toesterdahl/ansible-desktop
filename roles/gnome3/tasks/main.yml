@@ -3,15 +3,14 @@
   become: yes
   apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
 
-- name: Install default packages
+- name: Install gnome3 packages
   become: yes
   apt:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - dconf-editor
-    - gnome-tweaks 
-    - python3-psutil
+    pkg:
+      - dconf-editor
+      - gnome-tweaks 
+      - python3-psutil
+    state: latest
     
 - name: Dock icon size
   dconf:

@@ -3,25 +3,25 @@
   become: yes
   apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
 
-- name: Install default packages
+- name: Install productivity packages
   become: yes
   apt:
-    name: "{{ item }}"
+    pkg:
+      - gscan2pdf 
+      - gedit-plugin-bracket-completion
+      - gedit-plugin-code-comment
+      - gedit-plugin-smart-spaces
+      - gedit-plugin-draw-spaces
+      - solaar
+      - keepassxc
+      - ffmpeg
+      - webp
+      - gthumb
+      - filezilla
+      - tesseract-ocr
+      - tesseract-ocr-eng
+      - tesseract-ocr-deu
+      - tesseract-ocr-swe
+      - gocr
     state: present
-  loop:
-    - gscan2pdf 
-    - gedit-plugin-bracket-completion
-    - gedit-plugin-code-comment
-    - gedit-plugin-smart-spaces
-    - gedit-plugin-draw-spaces
-    - solaar
-    - keepassxc
-    - ffmpeg
-    - webp
-    - gthumb
-    - filezilla
-    - tesseract-ocr
-    - tesseract-ocr-eng
-    - tesseract-ocr-deu
-    - tesseract-ocr-swe
-    - gocr
+
