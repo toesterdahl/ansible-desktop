@@ -23,5 +23,6 @@
       - tesseract-ocr-deu
       - tesseract-ocr-swe
       - gocr
+      - pinta
     state: present
 
