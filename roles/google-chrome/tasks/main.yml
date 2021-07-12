@@ -17,7 +17,7 @@
 
 - name: Update apt cache
   become: true
-  apt: update_cache=yes force_apt_get=yes
+  apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
   when: google_apt_exists.rc == 1
 
 - name: Install Google Chrome
