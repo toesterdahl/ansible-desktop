@@ -27,6 +27,7 @@
     - { role: zoom }
     - { role: ec }
     - { role: r-lang }
+    - { role: k6 }
 - hosts: base
   connection: local
   roles:

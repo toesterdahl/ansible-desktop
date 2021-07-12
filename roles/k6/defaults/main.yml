@@ -1,0 +1,2 @@
+---
+k6_apt_file: /etc/apt/sources.list.d/k6.list
