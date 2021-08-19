@@ -11,6 +11,7 @@
     - { role: restic }
     - { role: openssh-server }
     - { role: npm }
+    - { role: 3d-graphics }
 - hosts: laptop
   connection: local
   roles:
