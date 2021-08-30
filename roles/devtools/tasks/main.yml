@@ -8,6 +8,7 @@
   apt:
     pkg:
       - git
+      - git-lfs
       - meld
       - openjdk-8-jdk
       - openjdk-11-jdk
@@ -16,6 +17,7 @@
       - linux-headers-generic
       - visualvm
       - xmlstarlet
+      - dos2unix
     state: latest
     
 - name: Git config global
