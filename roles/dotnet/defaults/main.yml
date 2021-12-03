@@ -1,0 +1,2 @@
+---
+dotnet_apt_file: /etc/apt/sources.list.d/microsoft-prod.list

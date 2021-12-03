@@ -12,6 +12,7 @@
     - { role: openssh-server }
     - { role: npm }
     - { role: 3d-graphics }
+    - { role: dotnet }
 - hosts: laptop
   connection: local
   roles:
