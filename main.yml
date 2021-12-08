@@ -13,6 +13,7 @@
     - { role: npm }
     - { role: 3d-graphics }
     - { role: dotnet }
+    - { role: vscode }
 - hosts: laptop
   connection: local
   roles:
