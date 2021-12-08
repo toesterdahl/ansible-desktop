@@ -1,0 +1,57 @@
+---
+# From gantsign/ansible-role-golang
+- name: create download directory
+  file:
+    state: directory
+    mode: 'u=rwx,go=rx'
+    dest: '{{ golang_download_dir }}'
+
+- name: download Go language SDK
+  get_url:
+    url: '{{ golang_mirror }}/{{ golang_redis_filename }}'
+    dest: '{{ golang_download_dir }}/{{ golang_redis_filename }}'
+    force: no
+    use_proxy: yes
+    validate_certs: yes
+    mode: 'u=rw,go=r'
+
+- name: create Go language SDK installation directory
+  become: yes
+  file:
+    state: directory
+    owner: root
+    group: root
+    mode: 'u=rwx,go=rx'
+    dest: '{{ golang_install_dir }}'
+
+- name: install unarchive dependencies (zypper)
+  become: yes
+  zypper:
+    name:
+      - gzip
+      - tar
+    state: present
+  when: ansible_pkg_mgr == 'zypper'
+
+- name: install Go language SDK
+  become: yes
+  unarchive:
+    src: '{{ golang_download_dir }}/{{ golang_redis_filename }}'
+    remote_src: yes
+    extra_opts: '--strip-components=1'
+    dest: '{{ golang_install_dir }}'
+    owner: root
+    group: root
+    creates: '{{ golang_install_dir }}/bin'
+
+- name: Golang environment variables
+  blockinfile:
+    path: ~/.bashrc
+    create: yes
+    marker: "# {mark} Golang environment variables (managed by ansible)"
+    block: |
+      export GOROOT='/opt/go/{{ golang_version }}'
+      export PATH=$PATH:$GOROOT/bin
+      export GOPATH="$HOME/go"
+      export PATH=$PATH:$GOPATH/bin
+

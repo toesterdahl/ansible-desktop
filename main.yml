@@ -14,6 +14,7 @@
     - { role: 3d-graphics }
     - { role: dotnet }
     - { role: vscode }
+    - { role: golang }
 - hosts: laptop
   connection: local
   roles:
