@@ -5,6 +5,7 @@ This project is for managing an Ubuntu desktop machine using Ansible. The Ansibl
 
 # Install Ansible
 
+sudo apt install software-properties-common
 sudo apt install ansible 
 
 # Preparation
