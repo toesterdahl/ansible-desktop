@@ -97,4 +97,10 @@
     key: "/org/gnome/desktop/peripherals/keyboard/numlock-state"
     value: "true"
     state: present
+    
+- name: CapsLock
+  dconf:
+    key: "/org/gnome/desktop/input-sources/xkb-options"
+    value: "['caps:none']"
+    state: present    
 
