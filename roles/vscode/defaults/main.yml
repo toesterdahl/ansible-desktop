@@ -1,2 +1,2 @@
 ---
-vscode_apt_file: /etc/apt/sources.list.d/microsoft-vscode.list
+vscode_apt_file: /etc/apt/sources.list.d/vscode
