@@ -1,0 +1,5 @@
+---
+sysctl_swapiness_name: "vm.swappiness"
+sysctl_swapiness_value: "5"
+sysctl_compaction_name: "vm.compaction_proactiveness"
+sysctl_compaction_value: "5"

@@ -15,6 +15,7 @@
     - { role: dotnet }
     - { role: vscode }
     - { role: golang }
+    - { role: vmware }
 - hosts: laptop
   connection: local
   roles:

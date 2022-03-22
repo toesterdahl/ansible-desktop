@@ -18,9 +18,18 @@ Edit main.yml (project root) to add roles to hosts and groups from the inventory
 
 # Ansible Galaxy
 
+Install collections
+FIXME: Add the collection to requirements.yml
+
+```
+ansible-galaxy collection install ansible.posix
+```
+
 In case you use roles that are not part of this project but hosted on github you will need to add those external requirements to requirements.yml and install them. 
 
-```ansible-galaxy install -r requirements.yml```
+```
+ansible-galaxy install -r requirements.yml
+```
 
 # Apply (run) the playbook
 
@@ -29,7 +38,9 @@ The assumption here is that you check out the project and apply to a local machi
  - We use connection=local which will disable ssh execution. 
  - By limiting (--limit `hostname`) we make sure to apply only to the current host. 
 
-```ansible-playbook main.yml --ask-become-pass --limit `hostname` --inventory inventory.yml```
+```
+ansible-playbook main.yml --ask-become-pass --limit `hostname` --inventory inventory.yml
+```
 
 # Credits: 
 * Author: Torbjörn Österdahl (ultra-marine.org)
