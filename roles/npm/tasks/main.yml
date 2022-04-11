@@ -1,6 +1,9 @@
 ---
 - name: Install nvm
-  git: repo=https://github.com/creationix/nvm.git dest=~/.nvm # version=v0.38.00
+  git: 
+    repo: https://github.com/creationix/nvm.git 
+    dest: ~/.nvm
+    force: yes
   tags: nvm
   
 - name: Initiate nvm
