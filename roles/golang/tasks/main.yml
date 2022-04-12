@@ -11,8 +11,8 @@
     url: '{{ golang_mirror }}/{{ golang_redis_filename }}'
     dest: '{{ golang_download_dir }}/{{ golang_redis_filename }}'
     force: no
-    use_proxy: yes
-    validate_certs: yes
+    use_proxy: no
+    validate_certs: no
     mode: 'u=rw,go=r'
 
 - name: create Go language SDK installation directory
