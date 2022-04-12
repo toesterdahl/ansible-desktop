@@ -21,8 +21,9 @@
 - name: Gnome shell active plugins
   dconf:
     key: "/org/gnome/shell/enabled-extensions"
-    value: "['gnome-shell-audio-output-switcher@kgaut', 'bluetooth-quick-connect@bjarosze.gmail.com', 'caffeine@patapon.info']"
+    value: "['gnome-shell-audio-output-switcher@kgaut', 'bluetooth-quick-connect@bjarosze.gmail.com', 'caffeine@patapon.info', 'sound-output-device-chooser@kgshank.net', 'Vitals@CoreCoding.com']"
     state: present    
+
     
 - name: Terminal bind ctrl-v to paste
   dconf:
