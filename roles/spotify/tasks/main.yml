@@ -1,10 +1,15 @@
 ---
 # Details from https://www.spotify.com/us/download/linux/
 #
+
+# Key was downloaded like this, 
+# curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg > roles/spotify/defaults/spotify.gpg
+
 - name: Spotify - Add Spotify's official GPG Key
   become: true
   apt_key:
-    url: "https://download.spotify.com/debian/pubkey_0D811D58.gpg"
+    id: F9A211976ED662F00E59361E5E3C45D7B312C643
+    file: "{{ role_path }}/defaults/spotify.gpg"
     state: present
 
 - name: Spotify - Setup Spotify stable repository

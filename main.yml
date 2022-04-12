@@ -33,6 +33,7 @@
     - { role: ec }
     - { role: r-lang }
     - { role: k6 }
+    - { role: teams }
 - hosts: base
   connection: local
   roles:
