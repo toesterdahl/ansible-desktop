@@ -11,12 +11,13 @@
     file: "{{ role_path }}/defaults/mega.gpg"
     state: present
 
+# Not sure if this works on initial install, that is, does update fail if the key is not already installed in the exepcted location (signed-by).
 - name: Mega - Setup Mega stable repository
   become: true
   apt_repository:
     filename: "{{ mega_apt_file }}"
     repo: >-
-      deb https://mega.nz/linux/MEGAsync/xUbuntu_20.04/ ./
+      deb [signed-by=/usr/share/keyrings/meganz-archive-keyring.gpg] https://mega.nz/linux/repo/xUbuntu_20.04/ ./
 
 - name: Update apt cache
   become: true
