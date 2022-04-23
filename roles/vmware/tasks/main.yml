@@ -1,0 +1,27 @@
+---
+# Default swappiness is 20
+# with default swappiness vmware tend to run into excessive CPU consumption, 
+# indicated by excessive CPU use of the kcompactd0 process (host).
+#
+# sudo sysctl --all|grep vm.compaction_proactiveness
+# sudo sysctl -w vm.compaction_proactiveness=5
+# 
+- name: VmWare - set vm.swappiness 5
+  become: true
+  ansible.posix.sysctl:
+    name: "{{ sysctl_swapiness_name }}"
+    value: "{{ sysctl_swapiness_value }}"
+    state: present
+    sysctl_set: true
+    reload: true
+
+- name: VmWare - set vm.compaction.proactiveness 5
+  become: true
+  ansible.posix.sysctl:
+    name: "{{ sysctl_compaction_name }}"
+    value: "{{ sysctl_compaction_value }}"
+    state: present
+    sysctl_set: true
+    reload: true
+        
+

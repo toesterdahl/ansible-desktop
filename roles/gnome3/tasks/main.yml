@@ -21,8 +21,9 @@
 - name: Gnome shell active plugins
   dconf:
     key: "/org/gnome/shell/enabled-extensions"
-    value: "['gnome-shell-audio-output-switcher@kgaut', 'bluetooth-quick-connect@bjarosze.gmail.com', 'caffeine@patapon.info']"
+    value: "['gnome-shell-audio-output-switcher@kgaut', 'bluetooth-quick-connect@bjarosze.gmail.com', 'caffeine@patapon.info', 'sound-output-device-chooser@kgshank.net', 'Vitals@CoreCoding.com']"
     state: present    
+
     
 - name: Terminal bind ctrl-v to paste
   dconf:
@@ -97,4 +98,10 @@
     key: "/org/gnome/desktop/peripherals/keyboard/numlock-state"
     value: "true"
     state: present
+    
+- name: CapsLock
+  dconf:
+    key: "/org/gnome/desktop/input-sources/xkb-options"
+    value: "['caps:none']"
+    state: present    
 
