@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# From https://askubuntu.com/questions/1077086/a-new-command-combining-apt-update-apt-upgrade-in-18-04-or-some-later-beta
+# Copy the script to the location /usr/local/bin/update
+# sudo chmod 0755 /usr/local/bin/update
+
+if [ "$( /usr/bin/id -u )" -ne "0" ] ; then
+ echo 'Please run using sudo.'
+ exit 1
+fi
+set +e
+/bin/rm -f /var/cache/app-info/xmls/fwupd.xml
+/usr/bin/snap refresh
+/usr/bin/apt update
+/usr/bin/appstreamcli refresh --force
+/usr/bin/apt-file update
+/usr/bin/apt full-upgrade -y
+/usr/bin/apt autoremove --purge -y
+/usr/bin/apt clean
+/usr/bin/fwupdmgr refresh
+/usr/bin/fwupdmgr update
+# /usr/bin/updatedb
+/sbin/fstrim --all
+/usr/lib/update-notifier/update-motd-reboot-required
+
