@@ -12,6 +12,7 @@
       - meld
       - openjdk-8-jdk
       - openjdk-11-jdk
+      - openjdk-17-jdk
       - gcc
       - build-essential
       - linux-headers-generic
@@ -32,6 +33,15 @@
       [core]
         editor = vim
         excludesFile = ~/bin/git/gitignore
+      [diff]
+        tool = meld
+      [difftool]
+        prompt = false
+      [difftool "meld"]
+        cmd = meld "$LOCAL" "$REMOTE"
       [merge]
         tool = meld
+      [mergetool "meld"]
+        cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+        # cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
 
