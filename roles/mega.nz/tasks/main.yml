@@ -17,7 +17,7 @@
   apt_repository:
     filename: "{{ mega_apt_file }}"
     repo: >-
-      deb [signed-by=/usr/share/keyrings/meganz-archive-keyring.gpg] https://mega.nz/linux/repo/xUbuntu_20.04/ ./
+      deb [signed-by=/usr/share/keyrings/meganz-archive-keyring.gpg] https://mega.nz/linux/repo/xUbuntu_22.04/ ./
 
 - name: Update apt cache
   become: true

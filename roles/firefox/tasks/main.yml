@@ -2,12 +2,22 @@
 # Copy firefox.desktop, 
 # if destination does not already exist (force=no)
 #
+# As of 22.04 (jammy) there is no deb version of firefox, only the snap
+- name: Copy firefox launcher
+  copy: 
+    src: /snap/firefox/1670/firefox.desktop
+    dest: ~/.local/share/applications/firefox.desktop
+    force: no
+  when: ubuntu_target_version == 22.04
+
+# 20.04 (focal) defaults to the deb version
 - name: Copy firefox launcher
   copy: 
     src: /usr/share/applications/firefox.desktop
     dest: ~/.local/share/applications/firefox.desktop
     force: no
-
+  when: ubuntu_target_version == 20.04
+  
 # Since Firefox version 67 the default profile is 'default-release'
 #
 - name: Start default profile as default
