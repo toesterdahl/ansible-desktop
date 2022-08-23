@@ -33,6 +33,7 @@
     - { role: r-lang }
     - { role: k6 }
     - { role: teams }
+    - { role: vmware }
 - hosts: base
   connection: local
   roles:
