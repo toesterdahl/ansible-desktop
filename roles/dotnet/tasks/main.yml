@@ -16,7 +16,7 @@
   apt_repository:
     filename: "{{ dotnet_apt_file }}"
     repo: >-
-      deb [arch=amd64] https://packages.microsoft.com/ubuntu/{{ ubuntu_target_version_name }}/prod {{ ubuntu_target_version_name }} main
+      deb [arch=amd64,amd64,arm64,armhf] https://packages.microsoft.com/ubuntu/{{ ubuntu_target_version }}/prod {{ ubuntu_target_version_name }} main
 
 - name: Update apt cache
   become: true
