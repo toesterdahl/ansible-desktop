@@ -10,6 +10,7 @@
       - dconf-editor
       - gnome-tweaks 
       - python3-psutil
+      - chrome-gnome-shell
     state: latest
     
 - name: Dock icon size

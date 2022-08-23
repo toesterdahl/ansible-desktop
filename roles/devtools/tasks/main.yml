@@ -19,6 +19,7 @@
       - visualvm
       - xmlstarlet
       - dos2unix
+      - libfuse2
     state: latest
     
 - name: Git config global
