@@ -3,7 +3,7 @@
   become: yes
   apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
 
-- name: Install default packages
+- name: Install fonts
   become: yes
   apt:
     name: "{{ item }}"
@@ -11,6 +11,36 @@
   loop:
     - fonts-firacode 
     
+- name: Remove exotic fonts
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: absent
+  loop:
+    - fonts-beng
+    - fonts-deva
+    - fonts-gujr
+    - fonts-guru
+    - fonts-indic
+    - fonts-knda
+    - fonts-mlym
+    - fonts-orya
+    - fonts-smc
+    - fonts-taml
+    - fonts-telu
+    - fonts-thai-tlwg
+    - fonts-kacst
+    - fonts-kacst-one
+    - fonts-lao
+    - fonts-lklug-sinhala
+    - fonts-pagul
+    - fonts-sil-abyssinica
+    - fonts-sil-padauk
+    - fonts-tibetan-machine
+    - fonts-khmeros-core
+#    - fonts-noto-cjk
+#    - fonts-noto-mono
+       
 - name: Set monospaced font to firacode
   dconf:
     key: "/org/gnome/desktop/interface/monospace-font-name"
