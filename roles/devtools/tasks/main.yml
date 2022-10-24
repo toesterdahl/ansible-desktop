@@ -20,6 +20,8 @@
       - xmlstarlet
       - dos2unix
       - libfuse2
+      - fontforge
+
     state: latest
     
 - name: Git config global
