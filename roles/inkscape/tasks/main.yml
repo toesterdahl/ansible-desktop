@@ -1,0 +1,32 @@
+---
+# First export key using apt-key
+# apt-key list
+# apt-key export <key id> > keys/microsoft-prod.gpg
+# Where id is the alpha-numerical id in the list output..
+#
+- name: Inkscape - Add Inkscape's official GPG Key
+  become: true
+  apt_key:
+    id: BC528686B50D79E339D3721CEB3E94ADBE1229CF
+    file: "{{ role_path }}/defaults/incscape.gpg"
+    state: present
+
+- name: Inkscape - Setup Inkscape stable repository
+  become: true
+  apt_repository:
+    filename: "{{ inkscape_apt_file }}"
+    repo: >-
+      deb [arch=amd64,arm64,armhf] https://inkscape.dev/stable stable main
+
+- name: Update apt cache
+  become: true
+  apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+- name: Inkscape - Install
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - code
+
