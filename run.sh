@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ "$EUID" -eq 0 ]
+  then echo "Do not run script as root. Ansible will ask for privileges anyhow."
+  exit
+fi
+
+
 DIR="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 # This will sync some things that does not go into the public repo
