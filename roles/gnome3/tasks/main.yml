@@ -106,3 +106,12 @@
     value: "['caps:none']"
     state: present    
 
+- name: Just Perfection settings
+  dconf: 
+    key: "{{ '/org/gnome/shell/extensions/just-perfection/' + item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop: 
+     - { key: "clock-menu-position", value: "2" }
+     - { key: "clock-menu-position-offset", value: "2" }
+     - { key: "panel-in-overview", value: "true" }
