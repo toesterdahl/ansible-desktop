@@ -10,6 +10,7 @@
       - dconf-editor
       - gnome-tweaks 
       - python3-psutil
+      - gnome-shell-extension-manager
     state: latest
     
 - name: Dock icon size

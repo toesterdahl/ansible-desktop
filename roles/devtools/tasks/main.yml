@@ -19,6 +19,9 @@
       - visualvm
       - xmlstarlet
       - dos2unix
+      - libfuse2
+      - fontforge
+
     state: latest
     
 - name: Git config global
@@ -44,4 +47,6 @@
       [mergetool "meld"]
         cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
         # cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
+      [pull]
+      	rebase = true
 

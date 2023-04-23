@@ -44,7 +44,7 @@
     name: docker.io
     state: latest
     update_cache: "yes"
-  when: ubuntu_target_version == 20.04
+  when: ubuntu_target_version == 20.04 or ubuntu_target_version == 22.04
 
 - name: install Docker Compose 20.04
   become: true
@@ -52,7 +52,7 @@
     name: docker-compose
     state: latest
     update_cache: "yes"
-  when: ubuntu_target_version == 20.04
+  when: ubuntu_target_version == 20.04 or ubuntu_target_version == 22.04
 
 - name: Create the docker group
   become: true
@@ -63,7 +63,7 @@
 - name: Add your user to the group
   become: true
   user:
-    name: "{{ ansible_user }}"
+    name: "{{ ansible_env.USER }}"
     groups: ["docker"]
     append: "yes"
 

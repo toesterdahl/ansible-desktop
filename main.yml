@@ -6,8 +6,8 @@
     - { role: aptupgrade }
     - { role: cmdline }
     - { role: devtools }
-    - { role: docker, tags: ['docker'] }
     - { role: mega.nz }
+    - { role: docker, tags: ['docker'] }
     - { role: restic }
     - { role: openssh-server }
     - { role: npm }
@@ -15,7 +15,6 @@
     - { role: dotnet }
     - { role: vscode }
     - { role: golang }
-    - { role: vmware }
 - hosts: laptop
   connection: local
   roles:
@@ -34,6 +33,7 @@
     - { role: r-lang }
     - { role: k6 }
     - { role: teams }
+    - { role: vmware }
 - hosts: base
   connection: local
   roles:
