@@ -15,6 +15,7 @@
     - { role: dotnet }
     - { role: vscode }
     - { role: golang }
+    - { role: r-lang }
 - hosts: laptop
   connection: local
   roles:
@@ -27,13 +28,11 @@
     - { role: firefox }
     - { role: skype }
     - { role: signal }
-    - { role: spotify }
-    - { role: zoom }
-    - { role: ec }
-    - { role: r-lang }
-    - { role: k6 }
     - { role: teams }
-    - { role: vmware }
+    - { role: zoom }
+    - { role: spotify }
+    - { role: ec }
+    - { role: k6 }
 - hosts: base
   connection: local
   roles:

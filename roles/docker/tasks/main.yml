@@ -1,5 +1,5 @@
 ---
-- name: install apt package dependencies
+- name: Docker - install apt package dependencies
   become: true
   apt:
     pkg:
@@ -10,16 +10,13 @@
       - software-properties-common
     state: latest
 
-# Key was downloaded like this, 
-# curl -sS https://download.docker.com/linux/ubuntu/gpg > roles/docker/defaults/docker.gpg
-
-- name: Add Docker official GPG Key
+- name: Docker - Add Docker's official GPG Key
   become: true
   apt_key:
-    file: "{{ role_path }}/defaults/docker.gpg"
+    url: https://download.docker.com/linux/ubuntu/gpg
     state: present
 
-- name: Setup Stable Repository 18.04
+- name: Docker - Setup Stable Repository 18.04
   become: true
   apt_repository:
     filename: "{{ docker_apt_file }}"
@@ -27,7 +24,7 @@
       deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ubuntu_target_version_name }} stable
   when: ubuntu_target_version == "18.04"
 
-- name: install Docker 18.04
+- name: Docker - install Docker - 18.04
   become: true
   apt:
     pkg:
@@ -38,7 +35,7 @@
     update_cache: "yes"
   when: ubuntu_target_version == "18.04"
 
-- name: install Docker 20.04
+- name: Docker - install Docker - 20.04
   become: true
   apt:
     name: docker.io
@@ -46,7 +43,7 @@
     update_cache: "yes"
   when: ubuntu_target_version == 20.04 or ubuntu_target_version == 22.04
 
-- name: install Docker Compose 20.04
+- name: Docker - install Docker Compose - 20.04
   become: true
   apt:
     name: docker-compose
@@ -54,20 +51,21 @@
     update_cache: "yes"
   when: ubuntu_target_version == 20.04 or ubuntu_target_version == 22.04
 
-- name: Create the docker group
+- name: Docker - Create the docker group
   become: true
   group:
     name: docker
     state: present
 
-- name: Add your user to the group
+- name: Docker - Add your user to the group
   become: true
   user:
-    name: "{{ ansible_env.USER }}"
+    # name: "{{ ansible_env.USER }}"
+    name: "{{ lookup('env','USER') }}"
     groups: ["docker"]
     append: "yes"
 
-- name: Start Docker on boot
+- name: Docker - Start Docker on boot
   become: true
   service:
     name: "docker"
