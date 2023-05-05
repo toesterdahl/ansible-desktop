@@ -10,6 +10,7 @@
       - dconf-editor
       - gnome-tweaks 
       - python3-psutil
+      - chrome-gnome-shell
       - gnome-shell-extension-manager
     state: latest
     
