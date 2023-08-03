@@ -1,2 +1,2 @@
 ---
-skype_apt_file: /etc/apt/sources.list.d/skype-stable.list
+skype_apt_file: /etc/apt/sources.list.d/skype-unstable

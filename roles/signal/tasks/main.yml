@@ -1,15 +1,17 @@
 ---
-# Details from https://signal.org/de/download/#
-#
-# key id extracted using 'apt-key list'
-#
-- name: Signal - Add Signal's official GPG Key
-  become: true
-  apt_key:
-    id: DBA36B5181D0C816F630E889D980A17457F6FB06
-    url: "https://updates.signal.org/desktop/apt/keys.asc"
-    state: present
 
+# Key downloaded like this, 
+# wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > roles/signal/defaults/signal.gpg
+- name: Signal - Add signal's official GPG Key
+  become: true
+  copy: 
+    src: roles/signal/defaults/signal.gpg
+    dest: /etc/apt/trusted.gpg.d/signal.gpg
+    mode: '0644'
+    owner: root
+    group: root
+    state: present
+    
 - name: Signal - Setup Signal stable repository
   become: true
   # It appears that the repo only contain an entry for the 'xenial' Ubuntu version

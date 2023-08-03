@@ -8,15 +8,18 @@
 #
 
 # Key was downloaded like this, 
-# curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg > roles/spotify/defaults/spotify.gpg
-
+# sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
+# apt-key list
+# apt-key export E27409F51D1B66337F2D2F417A3A762FAFD4A51F | gpg --dearmor > roles/spotify/defaults/spotify.gpg
 - name: Spotify - Add Spotify's official GPG Key
   become: true
-  apt_key:
-    id: F9A211976ED662F00E59361E5E3C45D7B312C643
-    file: "{{ role_path }}/defaults/spotify.gpg"
-    state: present
-
+  copy: 
+    src: roles/spotify/defaults/spotify.gpg
+    dest: /etc/apt/trusted.gpg.d/spotify.gpg
+    mode: '0644'
+    owner: root
+    group: root
+  
 - name: Spotify - Setup Spotify stable repository
   become: true
   apt_repository:

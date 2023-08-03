@@ -1,16 +1,16 @@
 ---
-# First export key using apt-key
-# apt-key list
-# apt-key export <key id> > defaults/k6.gpg
-# Where id is the alpha-numerical id in the list output..
-#
+
+# Key downloaded like this, 
+# curl -s https://dl.k6.io/key.gpg | gpg --dearmor | sudo tee roles/k6/defaults/k6.gpg
 - name: k6 - Add k6's official GPG Key
   become: true
-  apt_key:
-    id: C5AD17C747E3415A3642D57D77C6C491D6AC1D69
-    file: "{{ role_path }}/defaults/k6.gpg"
-    state: present
-
+  copy: 
+    src: roles/k6/defaults/k6.gpg
+    dest: /etc/apt/trusted.gpg.d/k6.gpg
+    mode: '0644'
+    owner: root
+    group: root
+    
 - name: k6 - Setup k6 stable repository
   become: true
   apt_repository:

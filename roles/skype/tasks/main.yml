@@ -1,22 +1,22 @@
 ---
-# First export key using apt-key
-# apt-key list
-# apt-key export <key id> > keys/skype.gpg
-# Where id is the alpha-numerical id in the list output..
-#
+
+# Key downloaded like this, 
+# curl -s https://repo.skype.com/data/SKYPE-GPG-KEY | gpg --dearmor | sudo tee roles/skype/defaults/skype.gpg
 - name: Skype - Add Skype's official GPG Key
   become: true
-  apt_key:
-    id: D4040146BE3972509FD57FC71F3045A5DF7587C3
-    file: "{{ role_path }}/defaults/skype.gpg"
-    state: present
-
-- name: Skype - Setup Skype stable repository
+  copy: 
+    src: roles/skype/defaults/skype.gpg
+    dest: /etc/apt/trusted.gpg.d/skype.gpg
+    mode: '0644'
+    owner: root
+    group: root
+    
+- name: Skype - Setup Skype unstable repository
   become: true
   apt_repository:
     filename: "{{ skype_apt_file }}"
     repo: >-
-      deb [arch=amd64] https://repo.skype.com/deb stable main
+      deb [arch=amd64] https://repo.skype.com/deb unstable main
 
 - name: Update apt cache
   become: true

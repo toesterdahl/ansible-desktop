@@ -1,16 +1,16 @@
 ---
-# First export key using apt-key
-# apt-key list
-# apt-key export <key id> > rlang.gpg
-# Where id is the alpha-numerical id in the list output, spaces removed, ..
-#
+
+# Key downloaded like this, 
+# wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo gpg --dearmor -o roles/r-lang/defaults/rlang.gpg
 - name: rlang - Add rlang's official GPG Key
   become: true
-  apt_key:
-    id: E298A3A825C0D65DFD57CBB651716619E084DAB9
-    file: "{{ role_path }}/defaults/rlang.gpg"
-    state: present
-
+  copy: 
+    src: roles/r-lang/defaults/rlang.gpg
+    dest: /etc/apt/trusted.gpg.d/r-lang.gpg
+    mode: '0644'
+    owner: root
+    group: root
+    
 - name: rlang - Setup rlang stable repository
   become: true
   apt_repository:
