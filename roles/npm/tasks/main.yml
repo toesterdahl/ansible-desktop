@@ -29,6 +29,6 @@
 # Upgrade npm to latest: nvm install-latest-npm
 # List remote versions (lts only): nvm ls-remote --lts
 # List local versions: nvm ls
-# Install latest lts version of node: nvm --lts
+# Install latest lts version of node: nvm install --lts
 # Install given version of node: nvm install <version>   
 # Use version (current session): nvm use <version>
