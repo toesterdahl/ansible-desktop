@@ -23,10 +23,9 @@
     marker: "# {mark} Action start Profile {{ item }} (managed by ansible)"
     block: |
       [Desktop Action {{ item }}]
-        Name=Run with profile {{ item }}
-        Name[de]=Run Firefox mit Profil {{ item }}
-        Name[sv]=Starta med profilen {{ item }}
-        Exec=firefox -P {{ item }} -no-remote
-        OnlyShowIn=Unity;
+      Name=Run with profile {{ item }}
+      Name[de]=Run Firefox mit Profil {{ item }}
+      Name[sv]=Starta med profilen {{ item }}
+      Exec=firefox -P {{ item }} -no-remote
   when: profile_exists.rc == 1
 
