@@ -1,0 +1,31 @@
+---
+
+# Key downloaded like this, 
+# curl -fsSL https://packagecloud.io/slacktechnologies/slack/gpgkey | gpg --dearmor > roles/slack/defaults/slack.gpg
+- name: Slack - Add slack's official GPG Key
+  become: true
+  copy: 
+    src: roles/slack/defaults/slack.gpg
+    dest: /etc/apt/trusted.gpg.d/slack.gpg
+    mode: '0644'
+    owner: root
+    group: root
+    
+- name: Slack - Setup Slack stable repository
+  become: true
+  apt_repository:
+    filename: "{{ slack_apt_file }}"
+    repo: >-
+      deb [signed-by=/etc/apt/trusted.gpg.d/slack.gpg] https://packagecloud.io/slacktechnologies/slack/debian/ jessie main
+
+- name: Update apt cache
+  become: true
+  apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+- name: Slack - Install
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - slack-desktop

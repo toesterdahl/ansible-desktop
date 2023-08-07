@@ -33,6 +33,7 @@
     - { role: spotify }
     - { role: ec }
     - { role: k6 }
+    - { role: slack }
 - hosts: base
   connection: local
   roles:
