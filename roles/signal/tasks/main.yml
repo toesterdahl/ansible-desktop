@@ -10,7 +10,6 @@
     mode: '0644'
     owner: root
     group: root
-    state: present
     
 - name: Signal - Setup Signal stable repository
   become: true
