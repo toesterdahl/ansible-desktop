@@ -1,4 +1,12 @@
 ---
+## Create Launcher
+# Should the launcher not show up in the launcher menu, try this, 
+# Stop all instances of Firefox
+# Press Windows-A, 
+# Search for Firefox. If there is two ones, find the correct one by checking the right click menu
+# Drag it to the Laucher menu
+#
+
 - name: Is there an {{ item }} profile
   command: grep -Fxq 'Name={{ item }}' ~/.mozilla/firefox/profiles.ini
   register: profile_exists
@@ -16,7 +24,7 @@
     line: '\1;{{ item }}'
   when: profile_exists.rc == 1
 
-- name: Git config global
+- name: Create Action {{ item }}
   blockinfile:
     path: ~/.local/share/applications/firefox.desktop
     create: yes
