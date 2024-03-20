@@ -24,5 +24,6 @@
       - tesseract-ocr-swe
       - gocr
       - pinta
+      - pavucontrol
     state: present
 
