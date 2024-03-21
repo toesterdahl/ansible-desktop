@@ -22,7 +22,7 @@
     mode: '0744'
     
 - name: Install node and npm
-  shell: "source ~/.nvm/nvm.sh && nvm install {{ node_version }} && nvm alias {{ node_version }}"                                 
+  shell: "source ~/.nvm/nvm.sh && nvm install {{ node_version }} && nvm alias default {{ node_version }}"                                 
   args:
     executable: /bin/bash
 
