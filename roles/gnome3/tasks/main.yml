@@ -116,3 +116,12 @@
      - { key: "clock-menu-position", value: "2" }
      - { key: "clock-menu-position-offset", value: "2" }
      - { key: "panel-in-overview", value: "true" }
+
+
+# Reassign <Control><Shift>u since it conflict with idea
+# see https://superuser.com/a/1745264/1156436
+- name: Unicode completion
+  dconf:
+    key: "/org/freedesktop/ibus/panel/emoji/unicode-hotkey"
+    value: "['<Control><Super><Shift>u']"
+    state: present
