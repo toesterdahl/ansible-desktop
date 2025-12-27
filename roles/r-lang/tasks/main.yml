@@ -5,19 +5,22 @@
 - name: rlang - Add rlang's official GPG Key
   become: true
   copy: 
-    src: roles/r-lang/defaults/rlang.gpg
-    dest: /etc/apt/trusted.gpg.d/r-lang.gpg
+    src: "{{ role_path }}/defaults/rlang.gpg"
+    dest: /etc/apt/keyrings/r-lang.gpg
     mode: '0644'
     owner: root
     group: root
-    
+
 - name: rlang - Setup rlang stable repository
   become: true
-  apt_repository:
-    filename: "{{ rlang_apt_file }}"
-    repo: >-
-      deb https://cloud.r-project.org/bin/linux/ubuntu {{ ubuntu_target_version_name }}-cran40/
-
+  deb822_repository:
+    name: rlang
+    types: deb
+    uris: https://cloud.r-project.org/bin/linux/ubuntu
+    suites: "{{ ubuntu_target_version_name }}-cran40/"
+    architectures: amd64
+    signed_by: /etc/apt/keyrings/r-lang.gpg
+    
 - name: Update apt cache
   become: true
   apt: update_cache=yes force_apt_get=yes cache_valid_time=3600

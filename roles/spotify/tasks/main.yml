@@ -14,18 +14,22 @@
 - name: Spotify - Add Spotify's official GPG Key
   become: true
   copy: 
-    src: roles/spotify/defaults/spotify.gpg
-    dest: /etc/apt/trusted.gpg.d/spotify.gpg
+    src: "{{ role_path }}/defaults/spotify.gpg"
+    dest: /etc/apt/keyrings/spotify.gpg
     mode: '0644'
     owner: root
     group: root
-  
+
 - name: Spotify - Setup Spotify stable repository
   become: true
-  apt_repository:
-    filename: "{{ spotify_apt_file }}"
-    repo: >-
-      deb http://repository.spotify.com stable non-free
+  deb822_repository:
+    name: spotify
+    types: deb
+    uris: http://repository.spotify.com
+    suites: stable
+    components: non-free
+    architectures: amd64
+    signed_by: /etc/apt/keyrings/spotify.gpg
 
 - name: Update apt cache
   become: true

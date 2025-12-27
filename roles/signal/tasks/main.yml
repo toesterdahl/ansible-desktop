@@ -5,8 +5,8 @@
 - name: Signal - Add signal's official GPG Key
   become: true
   copy: 
-    src: roles/signal/defaults/signal.gpg
-    dest: /etc/apt/trusted.gpg.d/signal.gpg
+    src: "{{ role_path }}/defaults/signal.gpg"
+    dest: /etc/apt/keyrings/signal.gpg
     mode: '0644'
     owner: root
     group: root
@@ -17,7 +17,18 @@
   apt_repository:
     filename: "{{ signal_apt_file }}"
     repo: >-
-      deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main
+      deb [arch=amd64 signed-by=/etc/apt/keyrings/signal.gpg] https://updates.signal.org/desktop/apt xenial main
+
+- name: Signal - Setup Signal stable repository
+  become: true
+  deb822_repository:
+    name: signal
+    types: deb
+    uris: https://updates.signal.org/desktop/apt
+    suites: xenial
+    components: main
+    architectures: amd64
+    signed_by: /etc/apt/keyrings/signal.gpg
 
 - name: Update apt cache
   become: true

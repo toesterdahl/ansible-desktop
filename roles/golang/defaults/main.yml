@@ -1,13 +1,13 @@
 ---
 # Go language SDK version number
-golang_version: '1.17.4'
+golang_version: '1.25.5'
 
 golang_architecture: amd64
 
 golang_redis_filename: 'go{{ golang_version }}.linux-{{ golang_architecture }}.tar.gz'
 
 # Mirror to download the Go language SDK redistributable package from
-golang_mirror: 'https://storage.googleapis.com/golang'
+golang_mirror: 'https://go.dev/dl'
 
 # Base installation directory the Go language SDK distribution
 golang_install_dir: '/opt/go/{{ golang_version }}'

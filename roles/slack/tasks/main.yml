@@ -5,18 +5,22 @@
 - name: Slack - Add slack's official GPG Key
   become: true
   copy: 
-    src: roles/slack/defaults/slack.gpg
-    dest: /etc/apt/trusted.gpg.d/slack.gpg
+    src: "{{ role_path }}/defaults/slack.gpg"
+    dest: /etc/apt/keyrings/slack.gpg
     mode: '0644'
     owner: root
     group: root
-    
+
 - name: Slack - Setup Slack stable repository
   become: true
-  apt_repository:
-    filename: "{{ slack_apt_file }}"
-    repo: >-
-      deb [signed-by=/etc/apt/trusted.gpg.d/slack.gpg] https://packagecloud.io/slacktechnologies/slack/debian/ jessie main
+  deb822_repository:
+    name: slack
+    types: deb
+    uris: https://packagecloud.io/slacktechnologies/slack/debian
+    suites: jessie
+    components: main
+    architectures: amd64
+    signed_by: /etc/apt/keyrings/slack.gpg
 
 - name: Update apt cache
   become: true

@@ -1,7 +1,7 @@
 ---
 ansible_connection: local
-ubuntu_target_version_name: jammy
-ubuntu_target_version: 22.04
+ubuntu_target_version_name: noble
+ubuntu_target_version: 24.04
 jetbrains_mono_version: 1.0.3
 git_email: donald.duck@ducktown.com
 git_user: Donald Duck

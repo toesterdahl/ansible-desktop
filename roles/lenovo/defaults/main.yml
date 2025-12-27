@@ -1,0 +1,3 @@
+---
+lenovo_apt_file: /etc/apt/sources.list.d/lenovo.sources
+lenovo_apt_url: http://lenovo.archive.canonical.com/

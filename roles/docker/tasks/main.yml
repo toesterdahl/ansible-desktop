@@ -10,19 +10,37 @@
       - software-properties-common
     state: latest
 
+# Key downloaded like this, 
+# curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor > roles/docker/defaults/docker.gpg
 - name: Docker - Add Docker's official GPG Key
   become: true
-  apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    state: present
+  copy: 
+    src: "{{ role_path }}/defaults/docker.gpg"
+    dest: /etc/apt/keyrings/docker.gpg
+    mode: '0644'
+    owner: root
+    group: root
 
 - name: Docker - Setup Stable Repository 18.04
   become: true
   apt_repository:
     filename: "{{ docker_apt_file }}"
     repo: >-
-      deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ubuntu_target_version_name }} stable
+      deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ubuntu_target_version_name }} stable
   when: ubuntu_target_version == "18.04"
+
+- name: Docker - Setup Stable Repository 20 plus
+  become: true
+  deb822_repository:
+    name: Docker
+    types: deb
+    uris: https://download.docker.com/linux/ubuntu
+    suites: "{{ ubuntu_target_version_name }}"
+    components: stable
+    architectures: amd64
+    signed_by: /etc/apt/keyrings/docker.gpg
+  when: ubuntu_target_version == "20.04" or ubuntu_target_version == 22.04 or ubuntu_target_version == 24.04
+
 
 - name: Docker - install Docker - 18.04
   become: true

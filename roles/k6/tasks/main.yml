@@ -5,18 +5,22 @@
 - name: k6 - Add k6's official GPG Key
   become: true
   copy: 
-    src: roles/k6/defaults/k6.gpg
-    dest: /etc/apt/trusted.gpg.d/k6.gpg
+    src: "{{ role_path }}/defaults/k6.gpg"
+    dest: /etc/apt/keyrings/k6.gpg
     mode: '0644'
     owner: root
     group: root
-    
+
 - name: k6 - Setup k6 stable repository
   become: true
-  apt_repository:
-    filename: "{{ k6_apt_file }}"
-    repo: >-
-      deb https://dl.k6.io/deb stable main
+  deb822_repository:
+    name: k6
+    types: deb
+    uris: https://dl.k6.io/deb
+    suites: stable
+    components: main
+    architectures: amd64
+    signed_by: /etc/apt/keyrings/k6.gpg
 
 - name: Update apt cache
   become: true

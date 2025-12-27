@@ -6,17 +6,23 @@
 #
 - name: Dotnet - Add Dotnet's official GPG Key
   become: true
-  apt_key:
-    id: BC528686B50D79E339D3721CEB3E94ADBE1229CF
-    file: "{{ role_path }}/defaults/microsoft-prod.gpg"
-    state: present
+  copy: 
+    src: "{{ role_path }}/defaults/microsoft-dotnet.gpg"
+    dest: /etc/apt/keyrings/microsoft-dotnet.gpg
+    mode: '0644'
+    owner: root
+    group: root
 
 - name: Dotnet - Setup Dotnet stable repository
   become: true
-  apt_repository:
-    filename: "{{ dotnet_apt_file }}"
-    repo: >-
-      deb [arch=amd64,arm64,armhf] https://packages.microsoft.com/ubuntu/{{ ubuntu_target_version }}/prod {{ ubuntu_target_version_name }} main
+  deb822_repository:
+    name: dotnet
+    types: deb
+    uris: https://packages.microsoft.com/ubuntu/{{ ubuntu_target_version }}/prod
+    suites: "{{ ubuntu_target_version_name }}"
+    components: main
+    architectures: amd64
+    signed_by: /etc/apt/keyrings/microsoft-dotnet.gpg
 
 - name: Update apt cache
   become: true
@@ -28,5 +34,5 @@
     name: "{{ item }}"
     state: latest
   loop:
-    - dotnet-sdk-6.0
-    - aspnetcore-runtime-6.0
+    - dotnet-sdk-10.0
+    - aspnetcore-runtime-10.0

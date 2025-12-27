@@ -5,27 +5,8 @@
 - name: Skype - Add Skype's official GPG Key
   become: true
   copy: 
-    src: roles/skype/defaults/skype.gpg
-    dest: /etc/apt/trusted.gpg.d/skype.gpg
+    src: "{{ role_path }}/defaults/skype.gpg"
+    dest: /etc/apt/keyrings/skype.gpg
     mode: '0644'
     owner: root
     group: root
-    
-- name: Skype - Setup Skype unstable repository
-  become: true
-  apt_repository:
-    filename: "{{ skype_apt_file }}"
-    repo: >-
-      deb [arch=amd64] https://repo.skype.com/deb unstable main
-
-- name: Update apt cache
-  become: true
-  apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
-
-- name: Skype - Install
-  become: true
-  apt:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - skypeforlinux

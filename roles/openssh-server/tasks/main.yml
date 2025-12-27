@@ -12,6 +12,7 @@
     - openssh-server 
 
 - name: Start openssh-server (verify status)
+  become: yes
   service:
     name=ssh
     state=started

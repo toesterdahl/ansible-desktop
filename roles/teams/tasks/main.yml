@@ -6,17 +6,23 @@
 #
 - name: Teams - Add Teams's official GPG Key
   become: true
-  apt_key:
-    id: BC528686B50D79E339D3721CEB3E94ADBE1229CF
-    file: "{{ role_path }}/defaults/microsoft.gpg"
-    state: present
+  copy: 
+    src: "{{ role_path }}/defaults/microsoft-teams.gpg"
+    dest: /etc/apt/keyrings/microsoft-teams.gpg
+    mode: '0644'
+    owner: root
+    group: root
 
 - name: Teams - Setup Teams stable repository
   become: true
-  apt_repository:
-    filename: "{{ teams_apt_file }}"
-    repo: >-
-      deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main
+  deb822_repository:
+    name: teams
+    types: deb
+    uris: https://packages.microsoft.com/repos/ms-teams
+    suites: stable
+    components: main
+    architectures: amd64
+    signed_by: /etc/apt/keyrings/microsoft-teams.gpg
 
 - name: Update apt cache
   become: true

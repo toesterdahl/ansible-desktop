@@ -1,0 +1,36 @@
+---
+
+# Key downloaded like this, 
+# curl -s https://dl.lenovo.io/key.gpg | gpg --dearmor | sudo tee roles/lenovo/defaults/lenovo.gpg
+- name: Lenovo - Add lenovo's official GPG Key
+  become: true
+  copy: 
+    src: "{{ role_path }}/defaults/lenovo.gpg"
+    dest: /etc/apt/keyrings/lenovo.gpg
+    mode: '0644'
+    owner: root
+    group: root
+
+- name: Lenovo - Setup lenovo stable repository
+  become: true
+  deb822_repository:
+    name: lenovo
+    types: deb
+    uris: http://lenovo.archive.canonical.com/
+    suites: noble
+    components: sutton.simon
+    architectures: amd64
+    signed_by: /etc/apt/keyrings/lenovo.gpg
+
+- name: Update apt cache
+  become: true
+  apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+- name: Lenovo - Install
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - lenovo
+

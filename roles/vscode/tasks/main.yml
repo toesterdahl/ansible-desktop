@@ -6,17 +6,23 @@
 #
 - name: VsCode - Add VsCode's official GPG Key
   become: true
-  apt_key:
-    id: BC528686B50D79E339D3721CEB3E94ADBE1229CF
-    file: "{{ role_path }}/defaults/microsoft-prod.gpg"
-    state: present
+  copy: 
+    src: "{{ role_path }}/defaults/microsoft-vscode.gpg"
+    dest: /etc/apt/keyrings/microsoft-vscode.gpg
+    mode: '0644'
+    owner: root
+    group: root
 
 - name: VsCode - Setup VsCode stable repository
   become: true
-  apt_repository:
-    filename: "{{ vscode_apt_file }}"
-    repo: >-
-      deb [arch=amd64,arm64,armhf] https://packages.microsoft.com/repos/code stable main
+  deb822_repository:
+    name: vscode
+    types: deb
+    uris: https://packages.microsoft.com/repos/code
+    suites: stable
+    components: main
+    architectures: amd64
+    signed_by: /etc/apt/keyrings/microsoft-vscode.gpg
 
 - name: Update apt cache
   become: true

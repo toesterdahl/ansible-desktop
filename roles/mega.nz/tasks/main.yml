@@ -6,18 +6,22 @@
 #
 - name: Mega - Add Mega's official GPG Key
   become: true
-  apt_key:
-    id: 8F208FBF12FEE766AA32AEAF03C3AD3A7F068E5D
-    file: "{{ role_path }}/defaults/mega.gpg"
-    state: present
+  copy: 
+    src: "{{ role_path }}/defaults/mega.gpg"
+    dest: /etc/apt/keyrings/mega.gpg
+    mode: '0644'
+    owner: root
+    group: root
 
-# Not sure if this works on initial install, that is, does update fail if the key is not already installed in the exepcted location (signed-by).
 - name: Mega - Setup Mega stable repository
   become: true
-  apt_repository:
-    filename: "{{ mega_apt_file }}"
-    repo: >-
-      deb [signed-by=/usr/share/keyrings/meganz-archive-keyring.gpg] https://mega.nz/linux/repo/xUbuntu_22.04/ ./
+  deb822_repository:
+    name: Mega
+    types: deb
+    uris: https://mega.nz/linux/repo/xUbuntu_24.04/
+    suites: ./
+    architectures: amd64
+    signed_by: /etc/apt/keyrings/mega.gpg
 
 - name: Update apt cache
   become: true
