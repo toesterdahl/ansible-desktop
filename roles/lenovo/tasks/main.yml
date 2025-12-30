@@ -18,7 +18,7 @@
     types: deb
     uris: http://lenovo.archive.canonical.com/
     suites: noble
-    components: sutton.simon
+    components: stella
     architectures: amd64
     signed_by: /etc/apt/keyrings/lenovo.gpg
 
