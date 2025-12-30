@@ -26,7 +26,6 @@
     - { role: nfs-client }
     - { role: terminal-profiles }
     - { role: firefox }
-    - { role: skype }
     - { role: signal }
     - { role: teams }
     - { role: zoom }
