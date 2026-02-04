@@ -28,7 +28,7 @@ xkb_symbols "swissswedish" {
 
 Variants are registered in the file /usr/share/X11/xkb/rules/evdev.xml
 
-Add the following section follwing Switzlernand.. variantList
+Add the following section following Switzerland.. variantList
 
         <variant>
           <configItem>
