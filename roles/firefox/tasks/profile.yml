@@ -8,13 +8,13 @@
 #
 
 - name: Is there an {{ item }} profile
-  command: grep -Fxq 'Name={{ item }}' ~/.mozilla/firefox/profiles.ini
+  command: grep -Fxqs 'Name={{ item }}' ~/.mozilla/firefox/profiles.ini ~/./snap/firefox/common/.mozilla/firefox/profiles.ini
   register: profile_exists
   ignore_errors: true
 
 - name: Create {{ item }} profile
   command: firefox -CreateProfile {{ item }}
-  when: profile_exists.rc == 1
+  when: profile_exists.rc != 0
 
 - name: Append profile {{ item }}
   lineinfile:
@@ -22,7 +22,7 @@
     backrefs: yes
     regexp: "^(Actions=.*)$"
     line: '\1;{{ item }}'
-  when: profile_exists.rc == 1
+  when: profile_exists.rc != 0
 
 - name: Create Action {{ item }}
   blockinfile:
@@ -35,5 +35,5 @@
       Name[de]=Run Firefox mit Profil {{ item }}
       Name[sv]=Starta med profilen {{ item }}
       Exec=firefox -P {{ item }} -no-remote
-  when: profile_exists.rc == 1
+  when: profile_exists.rc != 0
 
