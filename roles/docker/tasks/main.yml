@@ -59,7 +59,7 @@
     name: docker.io
     state: latest
     update_cache: "yes"
-  when: ubuntu_target_version == 20.04 or ubuntu_target_version == 22.04
+  when: ubuntu_target_version == 20.04 or ubuntu_target_version == 22.04 or ubuntu_target_version == 24.04
 
 - name: Docker - install Docker Compose - 20.04
   become: true
@@ -67,7 +67,7 @@
     name: docker-compose
     state: latest
     update_cache: "yes"
-  when: ubuntu_target_version == 20.04 or ubuntu_target_version == 22.04
+  when: ubuntu_target_version == 20.04 or ubuntu_target_version == 22.04 or ubuntu_target_version == 24.04
 
 - name: Docker - Create the docker group
   become: true

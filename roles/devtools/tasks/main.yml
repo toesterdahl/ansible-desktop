@@ -15,7 +15,6 @@
       - openjdk-17-jdk
       - gcc
       - build-essential
-      - linux-headers-generic
       - visualvm
       - xmlstarlet
       - dos2unix
