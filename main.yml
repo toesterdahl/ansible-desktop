@@ -27,7 +27,6 @@
     - { role: terminal-profiles }
     - { role: firefox }
     - { role: signal }
-    - { role: teams }
     - { role: zoom }
     - { role: spotify }
     - { role: ec }

@@ -4,6 +4,9 @@
 # apt-key export <key id> > keys/microsoft-prod.gpg
 # Where id is the alpha-numerical id in the list output..
 #
+# Deprecated: This role is no more used. The official linux teams client have been removed by Microsoft. There is an inofficial teams client. To install that this role would need to be updated.
+
+#
 - name: Teams - Add Teams's official GPG Key
   become: true
   copy: 
