@@ -1,5 +1,5 @@
 ---
-# Details from https://www.zoom.com/us/download/linux/
+# Unmaintained - zoom have been disabled in our inventory.
 #
 - name: Check if zoom is installed
   command: dpkg-query -W zoom
