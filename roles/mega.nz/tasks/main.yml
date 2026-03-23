@@ -7,8 +7,8 @@
 - name: Mega - Add Mega's official GPG Key
   become: true
   copy: 
-    src: "{{ role_path }}/defaults/mega.gpg"
-    dest: /etc/apt/keyrings/mega.gpg
+    src: "{{ role_path }}/defaults/meganz-archive-keyring.gpg"
+    dest: /etc/apt/keyrings/meganz-archive-keyring.gpg
     mode: '0644'
     owner: root
     group: root
@@ -16,12 +16,12 @@
 - name: Mega - Setup Mega stable repository
   become: true
   deb822_repository:
-    name: Mega
+    name: megaio
     types: deb
     uris: https://mega.nz/linux/repo/xUbuntu_24.04/
     suites: ./
     architectures: amd64
-    signed_by: /etc/apt/keyrings/mega.gpg
+    signed_by: /etc/apt/keyrings/meganz-archive-keyring.gpg
 
 - name: Update apt cache
   become: true
