@@ -26,3 +26,8 @@
       - pavucontrol
     state: present
 
+- name: Install productivity snaps
+  snap:
+    name:
+      - discord
+
