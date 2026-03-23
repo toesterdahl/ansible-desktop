@@ -1,0 +1,8 @@
+- name: Discord Install
+  snap:
+    name:
+      - discord
+      
+- name: Discord Grant access to system-observe
+  shell:
+    cmd: snap connect discord:system-observe
