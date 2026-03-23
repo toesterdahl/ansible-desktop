@@ -33,6 +33,7 @@
     - { role: ec }
     - { role: k6 }
     - { role: slack }
+    - { role: discord }
 - hosts: base
   connection: local
   roles:
