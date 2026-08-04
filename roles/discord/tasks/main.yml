@@ -4,5 +4,6 @@
       - discord
       
 - name: Discord Grant access to system-observe
+  become: true
   shell:
     cmd: snap connect discord:system-observe
