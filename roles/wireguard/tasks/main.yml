@@ -1,0 +1,8 @@
+---
+- name: wireguard Install
+  become: yes
+  apt:
+    pkg:
+      - wireguard
+    state: present
+
