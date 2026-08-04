@@ -16,6 +16,7 @@
     - { role: vscode }
     - { role: golang }
     - { role: r-lang }
+    - { role: postgres }    
 - hosts: laptop
   connection: local
   roles:

@@ -1,0 +1,36 @@
+---
+
+# Key downloaded like this, 
+# curl --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor -o postgres.gpg
+- name: postgres - Add postgres's official GPG Key
+  become: true
+  copy: 
+    src: "{{ role_path }}/defaults/postgres.gpg"
+    dest: /etc/apt/keyrings/postgres.gpg
+    mode: '0644'
+    owner: root
+    group: root
+
+- name: postgres - Setup postgres stable repository
+  become: true
+  deb822_repository:
+    name: postgres
+    types: deb
+    uris: https://apt.postgresql.org/pub/repos/apt
+    suites: "{{ ubuntu_target_version_name }}-pgdg"
+    components: main
+    architectures: amd64
+    signed_by: /etc/apt/keyrings/postgres.gpg
+
+- name: Update apt cache
+  become: true
+  apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+- name: postgres - Install
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - postgresql-16
+
