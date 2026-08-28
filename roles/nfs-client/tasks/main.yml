@@ -11,12 +11,50 @@
   loop:
     - nfs-common 
 
+# Marked as 'absent'. Remove this in favor of using autofs. Keep in file to potentially use it for servers. 
 - name: Share mount
   become: yes
   blockinfile:
     path: /etc/fstab
     create: yes
     marker: "# {mark} Mounting share"
+    state: "absent"
     block: |
       {{ item }}
   with_items: "{{ share_mount }}"
+
+- name: Automount master register nfs
+  become: yes
+  blockinfile:
+    path: /etc/auto.master
+    create: yes
+    marker: "# {mark} Automount master register nfs (managed by ansible)"
+    block: |
+        # Attach nfs drives under export
+        # ghost: directories appear in file listings (ghosted) before actually mounted.
+        /export /etc/auto.nfs --timeout=3 --ghost
+        # Automatically search servers and connect. Good for searches in Nautilus and alike.
+        /net -hosts --timeout=60
+  register: autofsmaster
+
+- name: Automount share per autofs
+  become: yes
+  copy:
+    dest: "/etc/auto.nfs"
+    content: |
+        # nfs4: yes we want version 4, of course
+        # rw: read-write
+        # user: able to mount as a user, without 'root'
+        # soft: time-out when connection fails
+        # timeo: the time-out, in connection with soft
+        # bg: try to reconnect, in background, after a previous failure
+        # intr: Allow a blocked program to interrupt
+        # _intr_netdev: don't mount until the network is available
+        share -fstype=nfs4,rw,user,soft,timeo=3,bg,intr,_netdev base.local:/share
+
+- name: Restart Automount
+  become: yes
+  ansible.builtin.service:
+    name: autofs
+    state: restarted
+  when: autofsmaster.changed
