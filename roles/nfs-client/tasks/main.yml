@@ -9,7 +9,10 @@
     name: "{{ item }}"
     state: present
   loop:
-    - nfs-common 
+    - nfs-common
+    - smbclient
+    - cifs-utils
+    - autofs
 
 # Marked as 'absent'. Remove this in favor of using autofs. Keep in file to potentially use it for servers. 
 - name: Share mount
