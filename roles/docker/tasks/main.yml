@@ -39,7 +39,7 @@
     components: stable
     architectures: amd64
     signed_by: /etc/apt/keyrings/docker.gpg
-  when: ubuntu_target_version == "20.04" or ubuntu_target_version == 22.04 or ubuntu_target_version == 24.04
+  when: ubuntu_target_version == "20.04" or ubuntu_target_version == 22.04 or ubuntu_target_version == 24.04 or ubuntu_target_version == 26.04
 
 
 - name: Docker - install Docker - 18.04
@@ -59,7 +59,7 @@
     name: docker.io
     state: latest
     update_cache: "yes"
-  when: ubuntu_target_version == 20.04 or ubuntu_target_version == 22.04 or ubuntu_target_version == 24.04
+  when: ubuntu_target_version == 20.04 or ubuntu_target_version == 22.04 or ubuntu_target_version == 24.04 or ubuntu_target_version == 26.04
 
 - name: Docker - install Docker Compose - 20.04
   become: true
@@ -67,7 +67,7 @@
     name: docker-compose
     state: latest
     update_cache: "yes"
-  when: ubuntu_target_version == 20.04 or ubuntu_target_version == 22.04 or ubuntu_target_version == 24.04
+  when: ubuntu_target_version == 20.04 or ubuntu_target_version == 22.04 or ubuntu_target_version == 24.04 or ubuntu_target_version == 26.04
 
 - name: Docker - Create the docker group
   become: true
@@ -78,7 +78,6 @@
 - name: Docker - Add your user to the group
   become: true
   user:
-    # name: "{{ ansible_env.USER }}"
     name: "{{ lookup('env','USER') }}"
     groups: ["docker"]
     append: "yes"

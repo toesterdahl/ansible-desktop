@@ -18,7 +18,7 @@
   deb822_repository:
     name: megaio
     types: deb
-    uris: https://mega.nz/linux/repo/xUbuntu_24.04/
+    uris: https://mega.nz/linux/repo/xUbuntu_{{ ubuntu_target_version }}/
     suites: ./
     architectures: amd64
     signed_by: /etc/apt/keyrings/meganz-archive-keyring.gpg

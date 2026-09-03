@@ -10,6 +10,7 @@
     state: present
   loop:
     - fonts-firacode 
+    - ttf-mscorefonts-installer
     
 - name: Remove exotic fonts
   become: yes
