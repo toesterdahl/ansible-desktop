@@ -5,7 +5,7 @@ This project is for managing an Ubuntu desktop machine using Ansible. The Ansibl
 
 # Install Ansible
 
-sudo apt install software-properties-common
+sudo apt install software-properties-common python3-lxml
 sudo apt install ansible 
 
 # Preparation
@@ -41,6 +41,14 @@ The assumption here is that you check out the project and apply to a local machi
 ```
 ansible-playbook main.yml --ask-become-pass --limit `hostname` --inventory inventory.yml
 ```
+
+# Run one single role
+
+Example of applying the 'keyboard' role only. This is useful when debugging and developing new roles. 
+
+``` 
+ansible all --ask-become-pass --limit `hostname` --inventory inventory.yml -m ansible.builtin.import_role -a "name=keyboard"
+``` 
 
 # Credits: 
 * Author: Torbjörn Österdahl (ultra-marine.org)

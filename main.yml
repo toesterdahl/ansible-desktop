@@ -21,12 +21,13 @@
   connection: local
   roles:
     - { role: productivity }
+    - { role: keyboard }
     - { role: gnome3 }
-    - { role: google-chrome }
-    - { role: fonts }
-    - { role: nfs-client }
     - { role: terminal-profiles }
+    - { role: fonts }
     - { role: firefox }
+    - { role: google-chrome }
+    - { role: nfs-client }
     - { role: signal }
     - { role: spotify }
     - { role: ec }

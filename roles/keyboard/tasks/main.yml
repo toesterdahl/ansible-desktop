@@ -1,0 +1,65 @@
+- name: Add variant to ch keyboard
+  become: yes
+  blockinfile:
+    path: /usr/share/X11/xkb/symbols/ch
+    create: yes
+    marker: "# {mark} Swissswedish keyboard variant"
+    block: |
+      partial alphanumeric_keys
+      xkb_symbols "swissswedish" {
+          include "ch(basic)"
+          name[Group1]= "German (Switzerland, with Swedish)";
+          key <AD06> { [          y,          Y                             ] };
+          key <AD07> { [          u,          U,   udiaeresis,   Udiaeresis ] };
+          key <AD11> { [      aring,      Aring,  bracketleft,       egrave ] };
+          key <AC02> { [          s,          S,       ssharp,      section ] };
+          key <AC10> { [ odiaeresis, Odiaeresis,       eacute,       eacute ] };
+          key <AC11> { [ adiaeresis, Adiaeresis,    braceleft,       agrave ] };
+          key <AB01> { [          z,          Z                             ] };
+      };
+
+- name: Add variant to evdev.lst
+  become: yes
+  lineinfile:
+    path: /usr/share/X11/xkb/rules/evdev.lst
+    insertafter: "! variant"
+    line: "  swissswedish    ch: German (Switzerland, Swedish)"
+
+- name: Check if layout is present in evdev.xml
+  xml: 
+    path: /usr/share/X11/xkb/rules/evdev.xml
+    xpath: /xkbConfigRegistry/layoutList/layout[configItem/name='ch']/variantList/variant[configItem/name='swissswedish']
+    count: true
+  register: layout_swissswedish_node
+
+- name: Add layout to evdev.xml
+  become: yes
+  xml:
+    path: /usr/share/X11/xkb/rules/evdev.xml
+    xpath: /xkbConfigRegistry/layoutList/layout[configItem/name='ch']/variantList
+    backup: yes
+    input_type: xml
+    add_children:
+      - |
+          <variant>
+                    <configItem>
+                      <name>swissswedish</name>
+                      <shortDescription>ch+swissswedish</shortDescription>
+                      <description>German (Switzerland, Swedish)</description>
+                    </configItem>
+                  </variant>
+    pretty_print: true
+  when: layout_swissswedish_node.count == 0
+
+- name: Reconfigure xkb-data
+  become: yes
+  shell: dpkg-reconfigure xkb-data
+
+- name: Set keyboard layout
+  become: yes
+  become_user: "{{ lookup('env','USER') }}"
+  tags: dconf
+  dconf:
+    key: "/org/gnome/desktop/input-sources/sources"
+    value: "[('xkb', 'ch+swissswedish'), ('xkb', 'ch'), ('xkb', 'ch+fr'), ('xkb', 'se')]"
+    state: present
